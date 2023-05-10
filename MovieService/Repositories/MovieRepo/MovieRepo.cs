@@ -4,18 +4,19 @@ using System.Threading.Tasks;
 using MovieService.Model;
 using MovieService.Persistence;
 
-namespace MovieService.Repositories.MovieRepo;
-public class MovieRepo : IMovieRepo
-{
-    private readonly MovieDbContext persistence;
-
-    public async Task<IList<Movie>> GetMoviesAsync()
+namespace MovieService.Repositories.MovieRepo{
+    public class MovieRepo : IMovieRepo
     {
-        return persistence.Movies.ToList();
-    }
+        private readonly MovieDbContext persistence;
 
-    public async Task<Movie> GetMovieByIdAsync(int Id)
-    {
-        return await persistence.Movies.FindAsync(Id);
+        public async Task<IList<Movie>> GetMoviesAsync()
+        {
+            return persistence.Movies.ToList();
+        }
+
+        public async Task<Movie> GetMovieByIdAsync(int Id)
+        {
+            return await persistence.Movies.FindAsync(Id);
+        }
     }
 }
