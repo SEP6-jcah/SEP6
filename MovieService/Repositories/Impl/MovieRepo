@@ -1,0 +1,22 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MovieService.Model;
+using MovieService.Persistence;
+using MovieService.Repositories.Interfaces;
+
+namespace MovieService.Repositories.Impl;
+public class MovieRepo : IMovieRepo
+{
+    private readonly MovieDbContext persistence;
+
+    public async Task<IList<Movie>> GetMoviesAsync()
+    {
+        return persistence.Movies;
+    }
+
+    public async Task<Movie> GetMovieByIdAsync(int id)
+    {
+        return persistence.Movies.;
+    }
+}

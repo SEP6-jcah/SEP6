@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MovieService.Model;
+using MovieService.Repositories.Interfaces;
 
 namespace MovieService.Controllers;
 
@@ -6,21 +8,12 @@ namespace MovieService.Controllers;
 [Route("[controller]")]
 public class MovieServiceController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    private readonly ILogger<MovieServiceController> _logger;
-
-    public MovieServiceController(ILogger<MovieServiceController> logger)
-    {
-        _logger = logger;
-    }
+    private IMovieRepo MovieRepo;
 
     [HttpGet(Name = "GetMovie")]
     public IEnumerable<Movie> GetMovies()
     {
         //Get movies
+        return (IEnumerable<Movie>)MovieRepo.GetMovieAsync();
     }
 }
