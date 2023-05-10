@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "6ypwuUfIXaJ60J9VLmB9+DRl2ulN8t/uQwxc3+TdIbYM7Le8ZoLL6Iu/QEE1TOm+tv6oWcFFc+3GGp3B1AEDDg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\MovieService\\MovieService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jodyc\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
+    "C:\\Users\\jodyc\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\jodyc\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\jodyc\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\jodyc\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\jodyc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\jodyc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
