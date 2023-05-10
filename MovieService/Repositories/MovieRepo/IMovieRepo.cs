@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MovieService.Model;
 
-namespace MovieService.Repositories.Interfaces;
+namespace MovieService.Repositories.MovieRepo;
 
 public interface IMovieRepo
 {

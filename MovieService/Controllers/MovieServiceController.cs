@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MovieService.Model;
-using MovieService.Repositories.Interfaces;
+using MovieService.Repositories.MovieRepo;
 
 namespace MovieService.Controllers;
 
@@ -14,6 +14,6 @@ public class MovieServiceController : ControllerBase
     public IEnumerable<Movie> GetMovies()
     {
         //Get movies
-        return (IEnumerable<Movie>)MovieRepo.GetMovieAsync();
+        return (IEnumerable<Movie>)MovieRepo.GetMoviesAsync();
     }
 }

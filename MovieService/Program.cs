@@ -1,8 +1,13 @@
+using MovieService.Persistence;
+using MovieService.Repositories.MovieRepo;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<MovieDbContext>();
+builder.Services.AddScoped<IMovieRepo, MovieRepo>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
