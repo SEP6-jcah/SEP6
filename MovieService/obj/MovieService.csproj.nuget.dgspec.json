@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\MovieService\\MovieService.csproj": {}
+    "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\MovieService\\MovieService.csproj": {
+    "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\MovieService\\MovieService.csproj",
+        "projectUniqueName": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj",
         "projectName": "MovieService",
-        "projectPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\MovieService\\MovieService.csproj",
+        "projectPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj",
         "packagesPath": "C:\\Users\\jodyc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\MovieService\\obj\\",
+        "outputPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jodyc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -41,6 +41,14 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
