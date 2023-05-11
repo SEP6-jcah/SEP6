@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MovieService.Model;
 
-namespace MovieService.Persistence{
+namespace MovieService.Persistence
+{
     public class MovieDbContext : DbContext
     {
 

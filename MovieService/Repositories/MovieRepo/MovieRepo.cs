@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using MovieService.Model;
 using MovieService.Persistence;
 
-namespace MovieService.Repositories.MovieRepo{
+namespace MovieService.Repositories.MovieRepo
+{
     public class MovieRepo : IMovieRepo
     {
         private readonly MovieDbContext persistence;

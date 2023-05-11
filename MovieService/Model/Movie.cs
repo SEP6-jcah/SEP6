@@ -2,7 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace MovieService.Model{
+namespace MovieService.Model
+{
     public class Movie
     {
         [Required]

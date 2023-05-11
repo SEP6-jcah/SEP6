@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using MovieService.Model;
 using MovieService.Repositories.MovieRepo;
 
-namespace MovieService.Controllers{
+namespace MovieService.Controllers
+{
     [ApiController]
     [Route("[controller]")]
     public class MovieServiceController : ControllerBase
