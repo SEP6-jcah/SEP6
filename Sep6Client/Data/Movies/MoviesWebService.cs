@@ -9,10 +9,10 @@ namespace Sep6Client.Data.Movies
 {
     public class MoviesWebService : IMoviesWebService
     {
-        private readonly HttpClient client;
-        private readonly string uri = "http://localhost:8080/";
-        private JsonSerializerOptions camelCase;
-        private JsonSerializerOptions caseInsensitive;
+        private HttpClient client;
+        private readonly string uri = "http://localhost:8080/movies";
+        private readonly JsonSerializerOptions camelCase;
+        private readonly JsonSerializerOptions caseInsensitive;
 
         public MoviesWebService()
         {
@@ -31,15 +31,15 @@ namespace Sep6Client.Data.Movies
         {
             var response = await client.GetAsync(uri);
 
-            var moviesAsJson = await response.Content.ReadAsStringAsync();
-            var movies = JsonSerializer.Deserialize<IList<Movie>>(moviesAsJson);
-
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
             }
+            
+            var moviesAsJson = await response.Content.ReadAsStringAsync();
+            var movies = JsonSerializer.Deserialize<IList<Movie>>(moviesAsJson, caseInsensitive);
 
-            return movies;
+            return movies ?? new List<Movie>();
         }
 
         public async Task<Movie> GetMovieByIdAsync(int id)

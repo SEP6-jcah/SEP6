@@ -18,5 +18,13 @@ namespace Sep6Client.Model
         [Range(1, int.MaxValue, ErrorMessage = "Please enter a value bigger than {1}")]
         [JsonPropertyName("year")]
         public int Year { get; set; }
+        
+        [JsonConstructor]
+        public Movie(int id, string title, int year)
+        {
+            Id = id;
+            Title = title;
+            Year = year;
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace MovieService.Persistence
 
         public DbSet<Movie>? movies { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(@"Data Source = /app/movies.db");
         } 

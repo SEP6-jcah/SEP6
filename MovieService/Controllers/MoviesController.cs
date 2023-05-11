@@ -8,19 +8,19 @@ namespace MovieService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MovieServiceController : ControllerBase
+    public class MoviesController : ControllerBase
     {
         private IMovieRepo movieRepo;
 
-        public MovieServiceController(IMovieRepo movieRepository){
+        public MoviesController(IMovieRepo movieRepository){
             movieRepo = movieRepository;
         }
 
         [HttpGet]
-        public Task<IList<Movie>> GetMovies()
+        public async Task<IList<Movie>> GetMovies()
         {
             //Get movies
-            return movieRepo.GetMoviesAsync();
+            return await movieRepo.GetMoviesAsync();
         }
     }
 }

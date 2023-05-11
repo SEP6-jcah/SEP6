@@ -10,40 +10,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MovieService/Controllers/MovieServiceController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Controllers/MovieServiceController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Model/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Model/Movie.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/MovieService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/MovieService.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/wwwroot/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Sep6Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Sep6Client.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Counter.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/_Host.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/_Host.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/MovieService/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Model/Movie.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/Error.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PdqswVXEp7CBAsoVXu3YyJoweT" />
   <component name="ProjectViewState">
@@ -52,14 +57,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.MovieService: IIS Express">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Sep6Client: http">
     <configuration name="MovieService: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/MovieService/MovieService.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
@@ -159,7 +168,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683797527238</updated>
-      <workItem from="1683797533355" duration="5262000" />
+      <workItem from="1683797533355" duration="7321000" />
+      <workItem from="1683804934021" duration="2538000" />
+      <workItem from="1683807511822" duration="15000" />
+      <workItem from="1683807560245" duration="1300000" />
+      <workItem from="1683829607433" duration="5029000" />
     </task>
     <servers />
   </component>
@@ -167,8 +180,20 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

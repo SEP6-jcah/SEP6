@@ -1,7 +1,7 @@
-@page "/Movies"
+@page "/movies"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
-@inject MoviesWebService moviesWebService
+@inject IMoviesWebService moviesWebService
 
 <PageTitle>Movies</PageTitle>
 <h1>Movies</h1>
@@ -14,11 +14,11 @@ else
 {
     <table class="table">
         <thead>
-        <tr>
-            <th>Title</th>
-            <th>ID</th>
-            <th>Release Year</th>
-        </tr>
+            <tr>
+                <th>Title</th>
+                <th>ID</th>
+                <th>Release Year</th>
+            </tr>
         </thead>
         <tbody>
             @foreach (var movie in movies)
@@ -29,16 +29,26 @@ else
                     <td>@movie.Year</td>
                 </tr>
             }
-        </tbody>
+            </tbody>
     </table>
 }
+<p style="color: red">@errorMessage</p>
 
 @code 
 {
-    private IList<Movie>? movies;
+    private IList<Movie> movies;
+    private string errorMessage = "";
 
     protected override async Task OnInitializedAsync()
     {
-        movies = await moviesWebService.GetAllMoviesAsync();
+        try
+        {
+            movies = await moviesWebService.GetAllMoviesAsync();
+        }
+        catch(Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}";
+            System.Console.Out.WriteLine(e.StackTrace);
+        }
     }
 }

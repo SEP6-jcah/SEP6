@@ -263,4 +263,4 @@ FakesAssemblies/
 *.opt
 
 # Workspace
-workspace.xml
+.idea/.idea.SEP6.dir/.idea/workspace.xml
