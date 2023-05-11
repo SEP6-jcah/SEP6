@@ -263,4 +263,4 @@ FakesAssemblies/
 *.opt
 
 # Workspace
-*\workspace.xml
+workspace.xml

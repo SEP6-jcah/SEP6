@@ -1,6 +1,44 @@
 @page "/Movies"
-<h3>Movies</h3>
+@using Sep6Client.Model
+@using Sep6Client.Data.Movies
+@inject MoviesWebService moviesWebService
 
-@code {
-    
+<PageTitle>Movies</PageTitle>
+<h1>Movies</h1>
+
+@if (movies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>ID</th>
+            <th>Release Year</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in movies)
+            {
+                <tr>
+                    <td>@movie.Title</td>
+                    <td>@movie.Id</td>
+                    <td>@movie.Year</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code 
+{
+    private IList<Movie>? movies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        movies = await moviesWebService.GetAllMoviesAsync();
+    }
 }
