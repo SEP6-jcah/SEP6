@@ -9,22 +9,7 @@
     <projectFile profileName="IIS Express">MovieService/MovieService.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/wwwroot/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Counter.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/_Host.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/_Host.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
-    </list>
+    <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,7 +157,7 @@
       <workItem from="1683804934021" duration="2538000" />
       <workItem from="1683807511822" duration="15000" />
       <workItem from="1683807560245" duration="1300000" />
-      <workItem from="1683829607433" duration="5029000" />
+      <workItem from="1683829607433" duration="5640000" />
     </task>
     <servers />
   </component>
