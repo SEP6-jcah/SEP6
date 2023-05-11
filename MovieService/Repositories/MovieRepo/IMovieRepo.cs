@@ -6,6 +6,6 @@ namespace MovieService.Repositories.MovieRepo{
     public interface IMovieRepo
     {
         Task<IList<Movie>> GetMoviesAsync();
-        Task<Movie> GetMovieByIdAsync(int Id);
+        //Task<Movie> GetMovieByIdAsync(int Id);
     }
 }

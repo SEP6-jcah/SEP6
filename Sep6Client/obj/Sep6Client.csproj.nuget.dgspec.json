@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\Sep6Client\\Sep6Client.csproj": {}
+    "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\Sep6Client\\Sep6Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\Sep6Client\\Sep6Client.csproj": {
+    "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\Sep6Client\\Sep6Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\Sep6Client\\Sep6Client.csproj",
+        "projectUniqueName": "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\Sep6Client\\Sep6Client.csproj",
         "projectName": "Sep6Client",
-        "projectPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\Sep6Client\\Sep6Client.csproj",
+        "projectPath": "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\Sep6Client\\Sep6Client.csproj",
         "packagesPath": "C:\\Users\\jodyc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\Sep6Client\\obj\\",
+        "outputPath": "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\Sep6Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jodyc\\AppData\\Roaming\\NuGet\\NuGet.Config"

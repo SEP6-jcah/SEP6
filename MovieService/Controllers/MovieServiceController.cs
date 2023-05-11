@@ -7,13 +7,17 @@ namespace MovieService.Controllers{
     [Route("[controller]")]
     public class MovieServiceController : ControllerBase
     {
-        private IMovieRepo MovieRepo;
+        private IMovieRepo movieRepo;
 
-        [HttpGet(Name = "GetMovie")]
-        public IEnumerable<Movie> GetMovies()
+        public MovieServiceController(IMovieRepo movieRepository){
+            movieRepo = movieRepository;
+        }
+
+        [HttpGet]
+        public Task<IList<Movie>> GetMovies()
         {
             //Get movies
-            return (IEnumerable<Movie>)MovieRepo.GetMoviesAsync();
+            return movieRepo.GetMoviesAsync();
         }
     }
 }
