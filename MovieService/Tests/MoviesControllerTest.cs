@@ -16,7 +16,7 @@ namespace MovieService.Tests
             var mockMovieService = new Mock<IMovieRepo>();
             mockMovieService.Setup(service => service.GetMoviesAsync()).ReturnsAsync(expectedMovies);
 
-            var controller = new MovieServiceController(mockMovieService.Object);
+            var controller = new MoviesController(mockMovieService.Object);
 
             // Act
             var result = await controller.GetMovies();
