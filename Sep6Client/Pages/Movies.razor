@@ -36,7 +36,7 @@ else
 
 @code 
 {
-    private IList<Movie> movies;
+    private IList<Movie>? movies;
     private string errorMessage = "";
 
     protected override async Task OnInitializedAsync()
@@ -47,8 +47,8 @@ else
         }
         catch(Exception e)
         {
-            errorMessage = $"Exception thrown: {e.GetType()}";
-            System.Console.Out.WriteLine(e.StackTrace);
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MovieService.Model;
 using MovieService.Persistence;
 
@@ -16,9 +17,10 @@ namespace MovieService.Repositories.MovieRepo
 
         public async Task<IList<Movie>> GetMoviesAsync()
         {
-            if (persistence.movies != null)
+            if (persistence.Movies != null)
             {
-                return persistence.movies.ToList();
+                var movieSet = await persistence.Movies.ToArrayAsync();
+                return movieSet.ToList();
             }
             else
             {
@@ -30,11 +32,15 @@ namespace MovieService.Repositories.MovieRepo
                 return new List<Movie>{testMovie};
             }
         }
+        
+        public async Task<Movie> GetMovieByIdAsync(int id)
+        {
+            if (persistence.Movies != null)
+            {
+                return await persistence.Movies.FindAsync(id);
+            }
 
-
-        // public async Task<Movie> GetMovieByIdAsync(int Id)
-        // {
-        //     return await persistence.Movies.FindAsync(Id);
-        // }
+            return new Movie {Id = id, Title = "Test", Year = 2023};
+        }
     }
 }

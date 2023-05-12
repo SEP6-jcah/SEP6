@@ -10,7 +10,7 @@ namespace MovieService.Controllers
     [Route("[controller]")]
     public class MoviesController : ControllerBase
     {
-        private IMovieRepo movieRepo;
+        private readonly IMovieRepo movieRepo;
 
         public MoviesController(IMovieRepo movieRepository){
             movieRepo = movieRepository;
@@ -21,6 +21,13 @@ namespace MovieService.Controllers
         {
             //Get movies
             return await movieRepo.GetMoviesAsync();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Movie> GetMovieById(int id)
+        {
+            return await movieRepo.GetMovieByIdAsync(id);
         }
     }
 }
