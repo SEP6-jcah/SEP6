@@ -10,7 +10,7 @@ namespace Sep6Client.Data.Movies
     public class MoviesWebService : IMoviesWebService
     {
         private HttpClient client;
-        private readonly string uri = "http://localhost:8080/movies";
+        private readonly string uri = "http://movieservice:80/movies";
         private readonly JsonSerializerOptions camelCase;
         private readonly JsonSerializerOptions caseInsensitive;
 
@@ -36,7 +36,7 @@ namespace Sep6Client.Data.Movies
                 throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
             }
             
-            var moviesAsJson = await response.Content.ReadAsStringAsync();
+            var moviesAsJson = await response.Content.ReadAsStreamAsync();
             var movies = JsonSerializer.Deserialize<IList<Movie>>(moviesAsJson, caseInsensitive);
 
             return movies ?? new List<Movie>();
