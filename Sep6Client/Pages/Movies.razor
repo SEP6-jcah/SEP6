@@ -1,0 +1,54 @@
+@page "/movies"
+@using Sep6Client.Model
+@using Sep6Client.Data.Movies
+@inject IMoviesWebService moviesWebService
+
+<PageTitle>Movies</PageTitle>
+<h1>Movies</h1>
+
+@if (movies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>ID</th>
+                <th>Release Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in movies)
+            {
+                <tr>
+                    <td>@movie.Title</td>
+                    <td>@movie.Id</td>
+                    <td>@movie.Year</td>
+                </tr>
+            }
+            </tbody>
+    </table>
+}
+<p style="color: red">@errorMessage</p>
+
+@code 
+{
+    private IList<Movie>? movies;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            movies = await moviesWebService.GetAllMoviesAsync();
+        }
+        catch(Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+}

@@ -1,0 +1,38 @@
+@page "/movies/{Id}"
+@using Sep6Client.Data.Movies
+@using Sep6Client.Model
+@inject IMoviesWebService moviesWebService
+<h3>Movie With ID @Id</h3>
+
+@if (movie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>@movie.Title</h1>
+    <p>ID: @Id</p>
+    <p>Year: @movie.Year</p>
+}
+
+<p style="color: red">@errorMessage</p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Movie? movie;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            movie = await moviesWebService.GetMovieByIdAsync(Id);
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+}

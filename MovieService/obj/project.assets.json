@@ -18,6 +18,19 @@
           }
         }
       },
+      "Humanizer.Core/2.14.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Humanizer.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Mvc.Testing/7.0.5": {
         "type": "package",
         "dependencies": {
@@ -139,6 +152,28 @@
         },
         "runtime": {
           "lib/netstandard2.0/_._": {}
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Design/7.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Humanizer.Core": "2.14.1",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.5",
+          "Microsoft.Extensions.DependencyModel": "7.0.0",
+          "Mono.TextTemplating": "2.2.1"
+        },
+        "compile": {
+          "lib/net6.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/net6.0/Microsoft.EntityFrameworkCore.Design.props": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/7.0.5": {
@@ -840,6 +875,18 @@
           }
         }
       },
+      "Mono.TextTemplating/2.2.1": {
+        "type": "package",
+        "dependencies": {
+          "System.CodeDom": "4.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mono.TextTemplating.dll": {}
+        }
+      },
       "Moq/4.18.4": {
         "type": "package",
         "dependencies": {
@@ -1345,6 +1392,17 @@
         },
         "runtime": {
           "lib/netstandard1.1/System.Buffers.dll": {}
+        }
+      },
+      "System.CodeDom/4.4.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.CodeDom.dll": {}
         }
       },
       "System.Collections/4.3.0": {
@@ -2552,6 +2610,24 @@
         "readme.txt"
       ]
     },
+    "Humanizer.Core/2.14.1": {
+      "sha512": "lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
+      "type": "package",
+      "path": "humanizer.core/2.14.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "humanizer.core.2.14.1.nupkg.sha512",
+        "humanizer.core.nuspec",
+        "lib/net6.0/Humanizer.dll",
+        "lib/net6.0/Humanizer.xml",
+        "lib/netstandard1.0/Humanizer.dll",
+        "lib/netstandard1.0/Humanizer.xml",
+        "lib/netstandard2.0/Humanizer.dll",
+        "lib/netstandard2.0/Humanizer.xml",
+        "logo.png"
+      ]
+    },
     "Microsoft.AspNetCore.Mvc.Testing/7.0.5": {
       "sha512": "19/5gJutuCdOVPj0a8TljCoHe7z4ae1VGnSa2AbGA7EnNyLQgigFjrRMUzCcvRLypKH50+dwCMDU9cbmGX70GA==",
       "type": "package",
@@ -2657,6 +2733,21 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.Design/7.0.5": {
+      "sha512": "fzoU+Jk/chkqVOzDjuF+fwdc/6Tyqbp9L7rDORqB6IwHRG7nr+QnFOPdRi3B5kAZldvsvhUt+6Cl5qzeLT7B0Q==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.design/7.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "build/net6.0/Microsoft.EntityFrameworkCore.Design.props",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.Design.xml",
+        "microsoft.entityframeworkcore.design.7.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/7.0.5": {
@@ -3831,6 +3922,19 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "Mono.TextTemplating/2.2.1": {
+      "sha512": "KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
+      "type": "package",
+      "path": "mono.texttemplating/2.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/Mono.TextTemplating.dll",
+        "lib/netstandard2.0/Mono.TextTemplating.dll",
+        "mono.texttemplating.2.2.1.nupkg.sha512",
+        "mono.texttemplating.nuspec"
+      ]
+    },
     "Moq/4.18.4": {
       "sha512": "IOo+W51+7Afnb0noltJrKxPBSfsgMzTKCw+Re5AMx8l/vBbAbMDOynLik4+lBYIWDJSO0uV7Zdqt7cNb6RZZ+A==",
       "type": "package",
@@ -4369,6 +4473,27 @@
         "lib/netstandard1.1/System.Buffers.dll",
         "system.buffers.4.3.0.nupkg.sha512",
         "system.buffers.nuspec"
+      ]
+    },
+    "System.CodeDom/4.4.0": {
+      "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
+      "type": "package",
+      "path": "system.codedom/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "ref/net461/System.CodeDom.dll",
+        "ref/net461/System.CodeDom.xml",
+        "ref/netstandard2.0/System.CodeDom.dll",
+        "ref/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.4.4.0.nupkg.sha512",
+        "system.codedom.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Collections/4.3.0": {
@@ -7570,6 +7695,8 @@
     "net7.0": [
       "Microsoft.AspNetCore.Mvc.Testing >= 7.0.5",
       "Microsoft.AspNetCore.OpenApi >= 7.0.5",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 7.0.5",
+      "Microsoft.EntityFrameworkCore.Design >= 7.0.5",
       "Microsoft.EntityFrameworkCore.Sqlite >= 7.0.5",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.4",
       "Swashbuckle.AspNetCore >= 6.4.0",
@@ -7583,11 +7710,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj",
+      "projectUniqueName": "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj",
       "projectName": "MovieService",
-      "projectPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj",
+      "projectPath": "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\MovieService.csproj",
       "packagesPath": "C:\\Users\\jodyc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\obj\\",
+      "outputPath": "c:\\Users\\jodyc\\College\\SEMESTER_6\\SEP\\SEP6-jcah\\SEP6\\MovieService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jodyc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -7619,6 +7746,16 @@
             "version": "[7.0.5, )"
           },
           "Microsoft.AspNetCore.OpenApi": {
+            "target": "Package",
+            "version": "[7.0.5, )"
+          },
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[7.0.5, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
             "version": "[7.0.5, )"
           },
