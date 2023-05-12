@@ -1,4 +1,4 @@
-name: Build MovieService
+name: Build and Test MovieService
 
 on:
   push:
@@ -24,3 +24,6 @@ jobs:
 
       - name: Build project
         run: dotnet build ./MovieService/MovieService.csproj --configuration Release
+
+      - name: Run tests
+        run: dotnet test ./MovieService/Tests/Tests.csproj --configuration Release --verbosity normal
