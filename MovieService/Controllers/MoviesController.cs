@@ -1,8 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MovieService.Model;
-using MovieService.Repositories.MovieRepo;
 
 namespace MovieService.Controllers
 {
@@ -12,22 +11,45 @@ namespace MovieService.Controllers
     {
         private readonly IMovieRepo movieRepo;
 
-        public MoviesController(IMovieRepo movieRepository){
+        public MoviesController(IMovieRepo movieRepository)
+        {
             movieRepo = movieRepository;
         }
 
         [HttpGet]
-        public async Task<IList<Movie>> GetMovies()
+        public async Task<ActionResult<IList<Movie>>> GetAllMoviesAsync()
         {
-            //Get movies
-            return await movieRepo.GetMoviesAsync();
+            return Ok(await movieRepo.GetAllMoviesAsync());
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<Movie> GetMovieById(int id)
+        public async Task<ActionResult<IList<Movie>>> GetMoviesAsync([FromQuery] int startIndex)
         {
-            return await movieRepo.GetMovieByIdAsync(id);
+            try
+            {
+                return Ok(await movieRepo.GetNext50MoviesAsync(startIndex));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return StatusCode(418);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Movie>> GetMovieById(int id)
+        {
+            try
+            {
+                var movie = await movieRepo.GetMovieByIdAsync(id);
+
+                return Ok(movie);
+            }
+            catch (NullReferenceException e)
+            {
+                return StatusCode(404, e.Message);
+            }
         }
     }
 }

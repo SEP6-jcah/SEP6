@@ -9,7 +9,25 @@
     <projectFile profileName="IIS Express">MovieService/MovieService.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="" />
+    <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/MovieService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/MovieService.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Tests/MoviesControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Tests/MoviesControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesWebService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesWebService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client-build.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/client-build.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-build.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/service-build.ps1" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -158,6 +176,7 @@
       <workItem from="1683807511822" duration="15000" />
       <workItem from="1683807560245" duration="1300000" />
       <workItem from="1683829607433" duration="5640000" />
+      <workItem from="1684257470139" duration="12718000" />
     </task>
     <servers />
   </component>

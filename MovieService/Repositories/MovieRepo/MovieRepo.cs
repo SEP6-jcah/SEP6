@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MovieService.Model;
 using MovieService.Persistence;
 
 namespace MovieService.Repositories.MovieRepo
@@ -11,11 +11,12 @@ namespace MovieService.Repositories.MovieRepo
     {
         private readonly MovieDbContext persistence;
 
-        public MovieRepo(MovieDbContext movieDbContext){
+        public MovieRepo(MovieDbContext movieDbContext)
+        {
             persistence = movieDbContext;
         }
 
-        public async Task<IList<Movie>> GetMoviesAsync()
+        public async Task<IList<Movie>> GetAllMoviesAsync()
         {
             if (persistence.Movies != null)
             {
@@ -32,15 +33,50 @@ namespace MovieService.Repositories.MovieRepo
                 return new List<Movie>{testMovie};
             }
         }
+
+        public async Task<IList<Movie>> GetNext50MoviesAsync(int startIndex)
+        {
+            Movie[] movies = new Movie[50];
+            if (persistence != null)
+            {
+                var movieSet = await persistence.Movies.ToArrayAsync();
+
+                try
+                {
+                    for (int i = 0; i < 50; i++)
+                    {
+                        movies[i] = movieSet[startIndex + i];
+                    }
+                    
+                    return movies;
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    throw new IndexOutOfRangeException("No more movies to display.", e);
+                }
+            }
+
+            for (int i = 0; i < 50; i++)
+            {
+                movies[i] = new Movie {Id = i, Title = $"Test Movie {i}", Year = 1950 + i};
+            }
+
+            return movies;
+        }
         
         public async Task<Movie> GetMovieByIdAsync(int id)
         {
+            Movie? movie = null;
             if (persistence.Movies != null)
             {
-                return await persistence.Movies.FindAsync(id);
+                movie = await persistence.Movies.FindAsync(id);
             }
 
-            return new Movie {Id = id, Title = "Test", Year = 2023};
+            if (movie == null)
+            {
+                throw new NullReferenceException($"Movie with ID {id} not found.");
+            }
+            return movie;
         }
     }
 }

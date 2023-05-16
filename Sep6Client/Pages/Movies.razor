@@ -12,16 +12,17 @@
 }
 else
 {
-    <table class="table">
-        <thead>
+    <div>
+        <table class="table">
+            <thead>
             <tr>
                 <th>Title</th>
                 <th>ID</th>
                 <th>Release Year</th>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var movie in movies)
+            </thead>
+            <tbody>
+            @foreach (var movie in movies.Skip(movieCounter).Take(25))
             {
                 <tr>
                     <td>@movie.Title</td>
@@ -30,25 +31,68 @@ else
                 </tr>
             }
             </tbody>
-    </table>
+        </table>
+    </div>
+    
+    <div>
+        @if (pageNr != 1)
+        {
+            <a onclick="@OnLoadPrevious()"> @leftArrow-- Previous</a>
+        }
+        <a onclick="@OnLoadNext()">Next --></a>
+    </div>
 }
 <p style="color: red">@errorMessage</p>
 
 @code 
 {
     private IList<Movie>? movies;
+
+    private int movieCounter { get; set; }
+    private int pageNr = 1;
+    private int moviesPerPage = 25;
     private string errorMessage = "";
+    private char leftArrow = '>';
 
     protected override async Task OnInitializedAsync()
     {
+        // TODO: Set variable from cookies if available - Aldís 16.05.2023
+        movieCounter = 0;
+        
         try
         {
-            movies = await moviesWebService.GetAllMoviesAsync();
+            await LoadNewMovies();
         }
         catch(Exception e)
         {
             errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
+    }
+
+    private async Task LoadNewMovies()
+    {
+        movies = await moviesWebService.GetMoviesAsync(movieCounter);
+    }
+
+    private void UpdateMovieCounter()
+    {
+        movieCounter = pageNr * moviesPerPage;
+    }
+
+    private async Task OnLoadNext()
+    {
+        pageNr++;
+        UpdateMovieCounter();
+        if (movies[movieCounter + 1] == null)
+            await LoadNewMovies();
+    }
+    
+    private async Task OnLoadPrevious()
+    {
+        pageNr--;
+        UpdateMovieCounter();
+        if (movies[movieCounter - 1] == null)
+            await LoadNewMovies();
     }
 }

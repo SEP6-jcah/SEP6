@@ -6,7 +6,7 @@ namespace Sep6Client.Data.Movies
 {
     public interface IMoviesWebService
     {
-        Task<IList<Movie>> GetAllMoviesAsync();
+        Task<IList<Movie>> GetMoviesAsync(int startIndex);
         Task<Movie> GetMovieByIdAsync(int id);
     }
 }

@@ -27,9 +27,9 @@ namespace Sep6Client.Data.Movies
             };
         }
         
-        public async Task<IList<Movie>> GetAllMoviesAsync()
+        public async Task<IList<Movie>> GetMoviesAsync(int startIndex)
         {
-            var response = await client.GetAsync(uri);
+            var response = await client.GetAsync($"{uri}?startIndex={startIndex}");
 
             if (!response.IsSuccessStatusCode)
             {
@@ -37,9 +37,10 @@ namespace Sep6Client.Data.Movies
             }
             
             var moviesAsJson = await response.Content.ReadAsStreamAsync();
+            
             var movies = JsonSerializer.Deserialize<IList<Movie>>(moviesAsJson, caseInsensitive);
 
-            return movies ?? new List<Movie>();
+            return movies ?? throw new FormatException("Unmarshalling movies failed.");
         }
 
         public async Task<Movie> GetMovieByIdAsync(int id)
@@ -54,7 +55,7 @@ namespace Sep6Client.Data.Movies
                 throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
             }
 
-            return movie;
+            return movie ?? throw new FormatException($"Unmarshalling movie with ID {id} failed.");
         }
     }
 }

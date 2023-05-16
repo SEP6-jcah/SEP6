@@ -1,3 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
+
 namespace MovieService.Tests
 {
     public class MoviesControllerTests
@@ -14,12 +20,13 @@ namespace MovieService.Tests
             };
 
             var mockMovieService = new Mock<IMovieRepo>();
-            mockMovieService.Setup(service => service.GetMoviesAsync()).ReturnsAsync(expectedMovies);
+            mockMovieService.Setup(service => service.GetAllMoviesAsync()).ReturnsAsync(expectedMovies);
 
             var controller = new MoviesController(mockMovieService.Object);
 
             // Act
-            var result = await controller.GetMovies();
+            var response = await controller.GetAllMoviesAsync();
+            var result = (response.Result as OkObjectResult).Value as IList<Movie>;
 
             // Assert
             Assert.NotNull(result);
@@ -28,5 +35,32 @@ namespace MovieService.Tests
             Assert.Equal("Dodgeball", result.First().Title);
         }
 
+        [Theory]
+        [InlineData(0)]
+        public async Task GetMovies_StartIndex0_Returns50Movies(int startIndex)
+        {
+            // Arrange
+            var expectedMovies = new List<Movie>();
+
+            for (var i = 0; i < 50; i++)
+            {
+                expectedMovies.Add(new Movie {Id = i, Title = $"Test title {i+1}", Year = 1950 + i});
+            }
+            
+            var mockMovieService = new Mock<IMovieRepo>();
+            mockMovieService.Setup(service => service.GetNext50MoviesAsync(startIndex)).ReturnsAsync(expectedMovies);
+            
+            var controller = new MoviesController(mockMovieService.Object);
+            
+            // Act
+            var response = await controller.GetMoviesAsync(startIndex);
+            var result = (response.Result as OkObjectResult).Value as IList<Movie>;
+            
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(50, result.Count);
+            Assert.Equal("Test title 1", result.First().Title);
+            Assert.Equal("Test title 50", result.Last().Title);
+        }
     }
 }
