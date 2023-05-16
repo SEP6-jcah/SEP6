@@ -2,6 +2,7 @@
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
 @inject IMoviesWebService moviesWebService
+@inject NavigationManager nav
 
 <PageTitle>Movies</PageTitle>
 <h1>Movies</h1>
@@ -37,9 +38,9 @@ else
     <div>
         @if (pageNr != 1)
         {
-            <a onclick="@OnLoadPrevious()"> @leftArrow-- Previous</a>
+            <button @onclick="OnLoadPrevious">@leftArrow-- Previous</button>
         }
-        <a onclick="@OnLoadNext()">Next --></a>
+        <button @onclick="OnLoadNext">Next --></button>
     </div>
 }
 <p style="color: red">@errorMessage</p>
@@ -47,21 +48,22 @@ else
 @code 
 {
     private IList<Movie>? movies;
-
     private int movieCounter { get; set; }
-    private int pageNr = 1;
+    private int pageNr = 0;
     private int moviesPerPage = 25;
     private string errorMessage = "";
-    private char leftArrow = '>';
+    private char leftArrow = '<';
 
     protected override async Task OnInitializedAsync()
     {
-        // TODO: Set variable from cookies if available - Aldís 16.05.2023
-        movieCounter = 0;
-        
+        // TODO: Set movieCounter variable from cookies if available - Aldís 16.05.2023
+
         try
         {
-            await LoadNewMovies();
+            UpdateMovieCounter();
+            await LoadNewMoviesAsync();
+            if (pageNr == 0)
+                pageNr = 1;
         }
         catch(Exception e)
         {
@@ -70,29 +72,42 @@ else
         }
     }
 
-    private async Task LoadNewMovies()
+    private async Task LoadNewMoviesAsync()
     {
+        Console.WriteLine("Loading new movies...");
         movies = await moviesWebService.GetMoviesAsync(movieCounter);
     }
 
     private void UpdateMovieCounter()
     {
         movieCounter = pageNr * moviesPerPage;
+        Console.WriteLine($"Movie counter: {movieCounter}");
+    }
+
+    private void Refresh()
+    {
+        Console.WriteLine("Refreshing...");
+        nav.NavigateTo("/movies");
     }
 
     private async Task OnLoadNext()
     {
+        Console.WriteLine("Next button clicked.");
         pageNr++;
         UpdateMovieCounter();
-        if (movies[movieCounter + 1] == null)
-            await LoadNewMovies();
+        // Tried flipping the comparator, haven't tested it
+        if (movies.Count > movieCounter+1)
+            await LoadNewMoviesAsync();
+        Refresh();
     }
     
     private async Task OnLoadPrevious()
     {
+        Console.WriteLine("Previous button clicked.");
         pageNr--;
         UpdateMovieCounter();
-        if (movies[movieCounter - 1] == null)
-            await LoadNewMovies();
+        if (movies.Count < movieCounter-1)
+            await LoadNewMoviesAsync();
+        Refresh();
     }
 }

@@ -18,16 +18,16 @@ namespace MovieService.Tests
                 new Movie { Id = 2, Title = "The Princess Bride", Year = 1987},
                 new Movie { Id = 3, Title = "Transformers", Year = 2007}
             };
-
+        
             var mockMovieService = new Mock<IMovieRepo>();
-            mockMovieService.Setup(service => service.GetAllMoviesAsync()).ReturnsAsync(expectedMovies);
-
+            mockMovieService.Setup(service => service.GetNext50MoviesAsync(0)).ReturnsAsync(expectedMovies);
+        
             var controller = new MoviesController(mockMovieService.Object);
-
+        
             // Act
-            var response = await controller.GetAllMoviesAsync();
+            var response = await controller.GetMoviesAsync(0);
             var result = (response.Result as OkObjectResult).Value as IList<Movie>;
-
+        
             // Assert
             Assert.NotNull(result);
             Assert.IsType<List<Movie>>(result);

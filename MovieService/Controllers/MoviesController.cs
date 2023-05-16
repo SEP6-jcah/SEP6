@@ -17,12 +17,6 @@ namespace MovieService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<Movie>>> GetAllMoviesAsync()
-        {
-            return Ok(await movieRepo.GetAllMoviesAsync());
-        }
-
-        [HttpGet]
         public async Task<ActionResult<IList<Movie>>> GetMoviesAsync([FromQuery] int startIndex)
         {
             try
