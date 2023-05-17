@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace MovieService.Model
+namespace Sep6Client.Model
 {
     public class Rating
     {

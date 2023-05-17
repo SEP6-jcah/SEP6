@@ -1,8 +1,12 @@
-@page "/MovieDetails/{MovieId}"
+@page "/MovieDetails/{MovieId:int}"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
+@using Sep6Client.Data.Ratings
 @inject IMoviesWebService moviesWebService
+@inject IRatingsWebService ratingsWebService;
 @inject NavigationManager nav
+
+<PageTitle>Movie Details</PageTitle>
 
 @if (currentMovie == null)
 {
@@ -11,12 +15,49 @@
 else
 {
     <h1>@currentMovie.Title</h1>
+    <h3>Movie ID: @currentMovie.Id</h3>
+    <h3>Release Year: @currentMovie.Year</h3>
+
+    if (movieRating != null)
+    {
+        <p>Rating: @movieRating.MovieRating/10</p>
+        <p>Number of votes: @movieRating.Votes</p>
+    }
+    else
+    {
+        <p>Movie doesn't have a rating yet.</p>
+    }
 }
+
+<p style="color: red">@errorMessage</p>
+<button @onclick="OnClickBack">Back</button>
+
 
 
 @code {
     [Parameter]
     public int MovieId { get; set; }
-    private Movie currentMovie;
-    
+    private Movie? currentMovie;
+    private Rating? movieRating;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            currentMovie = await moviesWebService.GetMovieByIdAsync(MovieId);
+            movieRating = await ratingsWebService.GetRatingForMovie(MovieId);
+        }
+        catch (Exception e)
+        {
+            // TODO: Change UI error message to show something understandable to laymen - Aldís 17.05.23
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync($"{e.GetType()}\n{e.StackTrace}");
+        }
+    }
+
+    private void OnClickBack()
+    {
+        nav.NavigateTo("/movies");
+    }
 }

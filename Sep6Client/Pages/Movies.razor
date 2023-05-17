@@ -24,15 +24,18 @@ else
                 <th>Title</th>
                 <th>ID</th>
                 <th>Release Year</th>
+                <th>More...</th>
             </tr>
             </thead>
             <tbody>
             @foreach (var movie in movies)
             {
+                var id = movie.Id;
                 <tr>
                     <td>@movie.Title</td>
                     <td>@movie.Id</td>
                     <td>@movie.Year</td>
+                    <td><button @onclick="() => OpenDetails(id)">Details</button></td>
                 </tr>
             }
             </tbody>
@@ -68,6 +71,7 @@ else
         }
         catch(Exception e)
         {
+            // TODO: Change UI error message to show something understandable to laymen - Aldís 17.05.23
             errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
@@ -105,5 +109,10 @@ else
         await LoadNewMoviesAsync();
         Console.WriteLine("Refreshing...");
         nav.NavigateTo("/movies");
+    }
+
+    private void OpenDetails(int id)
+    {
+        nav.NavigateTo($"/MovieDetails/{id}");
     }
 }
