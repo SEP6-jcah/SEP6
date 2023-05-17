@@ -9,11 +9,11 @@ namespace MovieService.Repositories.RatingRepo
 {
     public class RatingRepo : IRatingRepo
     {
-        private readonly RatingDbContext persistence;
+        private readonly MovieDbContext persistence;
 
-        public RatingRepo(RatingDbContext ratingDbContext)
+        public RatingRepo(MovieDbContext dbContext)
         {
-            persistence = ratingDbContext;
+            persistence = dbContext;
         }
 
         public async Task<IList<Rating>> GetAllRatings()
