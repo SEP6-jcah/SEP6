@@ -1,0 +1,22 @@
+@page "/MovieDetails/{MovieId}"
+@using Sep6Client.Model
+@using Sep6Client.Data.Movies
+@inject IMoviesWebService moviesWebService
+@inject NavigationManager nav
+
+@if (currentMovie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>@currentMovie.Title</h1>
+}
+
+
+@code {
+    [Parameter]
+    public int MovieId { get; set; }
+    private Movie currentMovie;
+    
+}

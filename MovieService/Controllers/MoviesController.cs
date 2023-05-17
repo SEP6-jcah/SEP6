@@ -36,9 +36,7 @@ namespace MovieService.Controllers
         {
             try
             {
-                var movie = await movieRepo.GetMovieByIdAsync(id);
-
-                return Ok(movie);
+                return Ok(await movieRepo.GetMovieByIdAsync(id));
             }
             catch (NullReferenceException e)
             {

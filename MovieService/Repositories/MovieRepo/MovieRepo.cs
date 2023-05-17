@@ -23,15 +23,14 @@ namespace MovieService.Repositories.MovieRepo
                 var movieSet = await persistence.Movies.ToArrayAsync();
                 return movieSet.ToList();
             }
-            else
+
+            var testMovie = new Movie
             {
-                var testMovie = new Movie{
-                    Id = 123,
-                    Title = "Test",
-                    Year = 2023
-                };
-                return new List<Movie>{testMovie};
-            }
+                Id = 123,
+                Title = "Test",
+                Year = 2023
+            };
+            return new List<Movie>{testMovie};
         }
 
         public async Task<IList<Movie>> GetNext25MoviesAsync(int startIndex)
