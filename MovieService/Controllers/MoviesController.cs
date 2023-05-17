@@ -21,7 +21,7 @@ namespace MovieService.Controllers
         {
             try
             {
-                return Ok(await movieRepo.GetNext50MoviesAsync(startIndex));
+                return Ok(await movieRepo.GetNext25MoviesAsync(startIndex));
             }
             catch (Exception e)
             {

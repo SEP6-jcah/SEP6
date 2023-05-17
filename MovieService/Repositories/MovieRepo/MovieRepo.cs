@@ -34,16 +34,16 @@ namespace MovieService.Repositories.MovieRepo
             }
         }
 
-        public async Task<IList<Movie>> GetNext50MoviesAsync(int startIndex)
+        public async Task<IList<Movie>> GetNext25MoviesAsync(int startIndex)
         {
-            Movie[] movies = new Movie[50];
+            Movie[] movies = new Movie[25];
             if (persistence != null)
             {
                 var movieSet = await persistence.Movies.ToArrayAsync();
 
                 try
                 {
-                    for (int i = 0; i < 50; i++)
+                    for (int i = 0; i < 25; i++)
                     {
                         movies[i] = movieSet[startIndex + i];
                     }
@@ -56,7 +56,7 @@ namespace MovieService.Repositories.MovieRepo
                 }
             }
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 25; i++)
             {
                 movies[i] = new Movie {Id = i, Title = $"Test Movie {i}", Year = 1950 + i};
             }

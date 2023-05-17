@@ -6,7 +6,7 @@ namespace MovieService.Repositories.MovieRepo
     public interface IMovieRepo
     {
         Task<IList<Movie>> GetAllMoviesAsync();
-        Task<IList<Movie>> GetNext50MoviesAsync(int startIndex);
+        Task<IList<Movie>> GetNext25MoviesAsync(int startIndex);
         Task<Movie> GetMovieByIdAsync(int id);
     }
 }
