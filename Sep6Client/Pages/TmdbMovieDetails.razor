@@ -1,0 +1,42 @@
+@page "/TmdbMovieDetails/{Id}"
+@using Sep6Client.Data.TMDB
+@using Sep6Client.Model
+@inject ITmdbMoviesService moviesService
+@inject NavigationManager nav
+
+<PageTitle>Movie Details</PageTitle>
+
+@if (movie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>@movie.Title</h1>
+    <p>ID: @Id</p>
+    <p>Rating: @movie.Rating/10</p>
+    <p>@movie.Description</p>
+}
+
+<p style="color: red">@errorMessage</p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private TmdbMovie? movie;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            movie = await moviesService.GetMovieByIdAsync(Id);
+            Id = movie.Id;
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+}

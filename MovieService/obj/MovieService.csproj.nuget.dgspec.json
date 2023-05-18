@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\MovieService\\MovieService.csproj": {}
+    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\movieservice\\MovieService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\MovieService\\MovieService.csproj": {
+    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\movieservice\\MovieService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\MovieService\\MovieService.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\movieservice\\MovieService.csproj",
         "projectName": "MovieService",
-        "projectPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\MovieService\\MovieService.csproj",
+        "projectPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\movieservice\\MovieService.csproj",
         "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\MovieService\\obj\\",
+        "outputPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\movieservice\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -69,6 +69,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.6.0, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[110.2.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
