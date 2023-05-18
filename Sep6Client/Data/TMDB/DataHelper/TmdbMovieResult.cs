@@ -11,7 +11,7 @@ namespace Sep6Client.Data.TMDB.DataHelper
         public int Id { get; set; }
 
         [Required]
-        [JsonPropertyName("original_title")]
+        [JsonPropertyName("title")]
         public string? Title { get; set; }
 
         [Required]

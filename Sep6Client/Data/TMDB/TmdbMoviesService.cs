@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Sep6Client.Data.TMDB.DataHelper;
 using Sep6Client.Model;
 
@@ -30,9 +29,9 @@ namespace Sep6Client.Data.TMDB
             };
         }
 
-        private async Task<TmdbMovieListResult> GetMoviesAsync()
+        private async Task<TmdbMovieListResult> GetMoviesAsync(int pageNr)
         {
-            var response = await client.GetAsync($"{BaseUri}discover/movie?include_adult=false&include_video=false&page=1&sort_by=popularity.desc");
+            var response = await client.GetAsync($"{BaseUri}discover/movie?include_adult=false&include_video=false&page={pageNr}&sort_by=popularity.desc");
             
             if (!response.IsSuccessStatusCode)
             {
@@ -46,9 +45,9 @@ namespace Sep6Client.Data.TMDB
             return httpResponse ?? throw new HttpRequestException("Unmarshalling TMDB movies http response failed.");
         }
 
-        public async Task<IList<TmdbMovie>> GetBrowsingMoviesAsync()
+        public async Task<IList<TmdbMovie>> GetBrowsingMoviesAsync(int pageNr)
         {
-            var response = await GetMoviesAsync();
+            var response = await GetMoviesAsync(pageNr);
 
             var movies = new List<TmdbMovie>();
 

@@ -36,25 +36,32 @@ else
         </table>
     </div>
     
-    @* <div> *@
-    @*     @if (pageNr != 1) *@
-    @*     { *@
-    @*         <button @onclick="OnLoadPrevious">@leftArrow-- Previous</button> *@
-    @*     } *@
-    @*     <button @onclick="OnLoadNext">Next --></button> *@
-    @* </div> *@
+    <div>
+         @if (pageCounter > 1)
+         {
+             <button @onclick="OnLoadPreviousPage">@leftArrow-- Previous</button>
+         }
+         <button @onclick="OnLoadNextPage">Next --></button>
+     </div>
 }
 <p style="color: red">@errorMessage</p>
 
 @code {
     private IList<TmdbMovie>? movies;
+    private int pageCounter = 1;
     private string errorMessage = "";
+    private char leftArrow = '<';
     
     protected override async Task OnInitializedAsync()
     {
+        await GetMoviesAsync(pageCounter);
+    }
+
+    private async Task GetMoviesAsync(int pageNr)
+    {
         try
         {
-            movies = await moviesService.GetBrowsingMoviesAsync();
+            movies = await moviesService.GetBrowsingMoviesAsync(pageNr);
         }
         catch(Exception e)
         {
@@ -63,8 +70,21 @@ else
         }
     }
 
+    private async Task OnLoadNextPage()
+    {
+        movies = null;
+        await GetMoviesAsync(++pageCounter);
+    }
+    
+    private async Task OnLoadPreviousPage()
+    {
+        movies = null;
+        await GetMoviesAsync(--pageCounter);
+    }
+
     private void OpenMovieDetails(int id)
     {
+        // TODO: Add page number to cookies to navigate back to same page - Aldís 18.05.23
         nav.NavigateTo($"/TmdbMovieDetails/{id}");
     }
 }

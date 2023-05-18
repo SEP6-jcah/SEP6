@@ -20,5 +20,7 @@ namespace Sep6Client.Model
         // public IList<string>? Directors { get; set; }
         
         public string? ReleaseDate { get; set; }
+        
+        public string? Language { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-@page "/TmdbMovieDetails/{Id}"
+@page "/TmdbMovieDetails/{Id:int}"
 @using Sep6Client.Data.TMDB
 @using Sep6Client.Model
 @inject ITmdbMoviesService moviesService
@@ -13,6 +13,7 @@
 else
 {
     <h1>@movie.Title</h1>
+    @*<img src="@movie.Poster" alt="Official movie poster."/>*@
     <p>ID: @Id</p>
     <p>Rating: @movie.Rating/10</p>
     <p>@movie.Description</p>
@@ -31,7 +32,6 @@ else
         try
         {
             movie = await moviesService.GetMovieByIdAsync(Id);
-            Id = movie.Id;
         }
         catch (Exception e)
         {

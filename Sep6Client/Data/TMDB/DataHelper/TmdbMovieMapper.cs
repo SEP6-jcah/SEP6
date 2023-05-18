@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using Sep6Client.Model;
 
 namespace Sep6Client.Data.TMDB.DataHelper
@@ -21,7 +18,8 @@ namespace Sep6Client.Data.TMDB.DataHelper
                     Rating = result.Rating,
                     Votes = result.Votes,
                     Actors = result.Actors,
-                    ReleaseDate = result.ReleaseDate
+                    ReleaseDate = result.ReleaseDate,
+                    Language = result.Language
                 };
             }
             catch (Exception e)
