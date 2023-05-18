@@ -11,14 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/TMDB/ITmdbMoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/ITmdbMoviesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/TMDB/TmdbMoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/TmdbMoviesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/TmdbMovie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/TmdbMovie.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/TmdbMovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/TmdbMovieDetails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/TmdbMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/TmdbMovies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +32,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Sep6Client/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesWebService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/MovieById.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesWebService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Tests/Usings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/Error.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Program.cs" root0="FORCE_HIGHLIGHTING" />

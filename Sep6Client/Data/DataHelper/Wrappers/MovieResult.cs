@@ -22,23 +22,21 @@ namespace Sep6Client.Data.DataHelper.Wrappers
         [JsonPropertyName("overview")]
         public string? Description { get; set; }
         
-        // [Required]
+        [Required]
         [JsonPropertyName("poster_path")]
-        public string? Poster { get; set; }
+        public string Poster { get; set; }
         
+        [Required]
         [JsonPropertyName("original_language")]
-        public string? Language { get; set; }
+        public string Language { get; set; }
         
-        // [Required]
-        [Range(0, 10, ErrorMessage = "Please enter a value between {0} and {10}")]
+        [Required]
         [JsonPropertyName("vote_average")]
         public float Rating { get; set; }
         
-        // [Required]
         [JsonPropertyName("vote_count")]
         public int Votes { get; set; }
         
-        // [Required]
         [JsonPropertyName("person_results")]
         public IList<string>? Actors { get; set; }
     }
