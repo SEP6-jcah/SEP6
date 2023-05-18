@@ -11,25 +11,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/.idea/.idea.Pages.dir/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/.idea/.idea.Pages.dir/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/.idea/.idea.Pages.dir/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/.idea/.idea.Pages.dir/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieListResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/DataHelper/TmdbMovieResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/ITmdbMoviesService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/TMDB/TmdbMoviesService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/TmdbMovie.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/TmdbMovieDetails.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/TmdbMovies.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/MovieService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/MovieService.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Tests/MoviesControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Tests/MoviesControllerTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieService/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Tests/Tests.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/MovieService.csproj.nuget.g.targets" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/project.assets.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieService/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Sep6Client.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Sep6Client.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/Sep6Client.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/obj/project.nuget.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +66,9 @@
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PdqswVXEp7CBAsoVXu3YyJoweT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
