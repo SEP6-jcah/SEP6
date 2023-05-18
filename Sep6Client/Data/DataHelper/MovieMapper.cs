@@ -1,15 +1,16 @@
 using System;
+using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
 
-namespace Sep6Client.Data.TMDB.DataHelper
+namespace Sep6Client.Data.DataHelper
 {
-    public class TmdbMovieMapper
+    public class MovieMapper
     {
-        public static TmdbMovie ToTmdbMovie(TmdbMovieResult result)
+        public static Movie ToTmdbMovie(MovieResult result)
         {
             try
             {
-                return new TmdbMovie
+                return new Movie
                 {
                     Id = result.Id,
                     Title = result.Title,

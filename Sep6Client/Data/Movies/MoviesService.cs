@@ -5,19 +5,21 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Sep6Client.Data.TMDB.DataHelper;
+using Sep6Client.Data.DataHelper;
+using Sep6Client.Data.DataHelper.Wrappers;
+using Sep6Client.Data.Movies;
 using Sep6Client.Model;
 
 namespace Sep6Client.Data.TMDB
 {
-    public class TmdbMoviesService : ITmdbMoviesService
+    public class MoviesService : IMoviesService
     {
         private readonly HttpClient client;
         private const string BaseUri = "https://api.themoviedb.org/3/";
         private const string ApiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2YxNmY4ZDRmYTE4ZDhmZTY2MTZlNDcyYWJhMjNhMCIsInN1YiI6IjY0NjVkNjA3MDA2YjAxMDEwNTg4Y2ZkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RCfsqHoolmtYr-oCW7DLtmdlR1zqfeJz2NUkPvgBQZg";
         private readonly JsonSerializerOptions options;
         
-        public TmdbMoviesService()
+        public MoviesService()
         {
             client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApiKey);
@@ -29,7 +31,7 @@ namespace Sep6Client.Data.TMDB
             };
         }
 
-        private async Task<TmdbMovieListResult> GetMoviesAsync(int pageNr)
+        private async Task<MovieListResult> GetMoviesAsync(int pageNr)
         {
             var response = await client.GetAsync($"{BaseUri}discover/movie?include_adult=false&include_video=false&page={pageNr}&sort_by=popularity.desc");
             
@@ -40,20 +42,20 @@ namespace Sep6Client.Data.TMDB
 
             var stream = await response.Content.ReadAsStreamAsync();
 
-            var httpResponse = JsonSerializer.Deserialize<TmdbMovieListResult>(stream, options);
+            var httpResponse = JsonSerializer.Deserialize<MovieListResult>(stream, options);
 
             return httpResponse ?? throw new HttpRequestException("Unmarshalling TMDB movies http response failed.");
         }
 
-        public async Task<IList<TmdbMovie>> GetBrowsingMoviesAsync(int pageNr)
+        public async Task<IList<Movie>> GetBrowsingMoviesAsync(int pageNr)
         {
             var response = await GetMoviesAsync(pageNr);
 
-            var movies = new List<TmdbMovie>();
+            var movies = new List<Movie>();
 
             try
             {
-                movies = response.Movies.Select(TmdbMovieMapper.ToTmdbMovie).ToList();
+                movies = response.Movies.Select(MovieMapper.ToTmdbMovie).ToList();
             }
             catch (Exception e)
             {
@@ -64,7 +66,7 @@ namespace Sep6Client.Data.TMDB
             return movies;
         }
 
-        private async Task<TmdbMovieResult> GetMovieAsync(int id)
+        private async Task<MovieResult> GetMovieAsync(int id)
         {
             var response = await client.GetAsync($"{BaseUri}/movie/{id}");
                         
@@ -75,18 +77,18 @@ namespace Sep6Client.Data.TMDB
             
             var stream = await response.Content.ReadAsStreamAsync();
 
-            var httpResponse = JsonSerializer.Deserialize<TmdbMovieResult>(stream, options);
+            var httpResponse = JsonSerializer.Deserialize<MovieResult>(stream, options);
             
             return httpResponse ?? throw new HttpRequestException("Unmarshalling TMDB movies http response failed.");
         }
-        public async Task<TmdbMovie> GetMovieByIdAsync(int id)
+        public async Task<Movie> GetMovieByIdAsync(int id)
         {
             var response = await GetMovieAsync(id);
 
-            var movie = new TmdbMovie();
+            var movie = new Movie();
             try
             {
-                movie = TmdbMovieMapper.ToTmdbMovie(response);
+                movie = MovieMapper.ToTmdbMovie(response);
             }
             catch (Exception e)
             {

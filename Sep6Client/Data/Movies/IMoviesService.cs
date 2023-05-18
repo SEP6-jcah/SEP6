@@ -4,9 +4,9 @@ using Sep6Client.Model;
 
 namespace Sep6Client.Data.Movies
 {
-    public interface IMoviesWebService
+    public interface IMoviesService
     {
-        Task<IList<Movie>> GetMoviesAsync(int startIndex);
+        Task<IList<Movie>> GetBrowsingMoviesAsync(int pageNr);
         Task<Movie> GetMovieByIdAsync(int id);
     }
 }

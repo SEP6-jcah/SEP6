@@ -1,7 +1,7 @@
-@page "/movies"
+@page "/Movies"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
-@inject IMoviesWebService moviesWebService
+@inject IMoviesService moviesService
 @inject NavigationManager nav
 
 <PageTitle>Movies</PageTitle>
@@ -13,18 +13,13 @@
 }
 else
 {
-    if (movies.Count == 0)
-    {
-        SetErrorMessage("No movies to display.");
-    }
     <div>
         <table class="table">
             <thead>
             <tr>
                 <th>Title</th>
                 <th>ID</th>
-                <th>Release Year</th>
-                <th>More...</th>
+                <th>Rating</th>
             </tr>
             </thead>
             <tbody>
@@ -32,10 +27,9 @@ else
             {
                 var id = movie.Id;
                 <tr>
-                    <td>@movie.Title</td>
+                    <td><a @onclick="() => OpenMovieDetails(id)">@movie.Title</a></td>
                     <td>@movie.Id</td>
-                    <td>@movie.Year</td>
-                    <td><button @onclick="() => OpenDetails(id)">Details</button></td>
+                    <td>@movie.Rating/10</td>
                 </tr>
             }
             </tbody>
@@ -43,76 +37,54 @@ else
     </div>
     
     <div>
-        @if (pageNr != 1)
-        {
-            <button @onclick="OnLoadPrevious">@leftArrow-- Previous</button>
-        }
-        <button @onclick="OnLoadNext">Next --></button>
-    </div>
+         @if (pageCounter > 1)
+         {
+             <button @onclick="OnLoadPreviousPage">@leftArrow-- Previous</button>
+         }
+         <button @onclick="OnLoadNextPage">Next --></button>
+     </div>
 }
 <p style="color: red">@errorMessage</p>
 
-@code 
-{
+@code {
     private IList<Movie>? movies;
-    private int movieCounter;
-    private int pageNr = 1;
+    private int pageCounter = 1;
     private string errorMessage = "";
     private char leftArrow = '<';
-
+    
     protected override async Task OnInitializedAsync()
     {
-        // TODO: Set movieCounter variable from cookies if available - Aldís 16.05.2023
+        await GetMoviesAsync(pageCounter);
+    }
 
+    private async Task GetMoviesAsync(int pageNr)
+    {
         try
         {
-            movieCounter = 0;
-            await LoadNewMoviesAsync();
+            movies = await moviesService.GetBrowsingMoviesAsync(pageNr);
         }
         catch(Exception e)
         {
-            // TODO: Change UI error message to show something understandable to laymen - Aldís 17.05.23
             errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
     }
 
-    private void SetErrorMessage(string message)
+    private async Task OnLoadNextPage()
     {
-        errorMessage = message;
-    }
-
-    private async Task LoadNewMoviesAsync()
-    {
-        Console.WriteLine("Loading new movies...");
-        movies = await moviesWebService.GetMoviesAsync(movieCounter);
-    }
-
-    private async Task OnLoadNext()
-    {
-        Console.WriteLine("Next button clicked.");
-        pageNr++;
-        movieCounter += 25;
-        await Refresh();
+        movies = null;
+        await GetMoviesAsync(++pageCounter);
     }
     
-    private async Task OnLoadPrevious()
+    private async Task OnLoadPreviousPage()
     {
-        Console.WriteLine("Previous button clicked.");
-        pageNr--;
-        movieCounter -= 25;
-        await Refresh();
-    }
-    
-    private async Task Refresh()
-    {
-        await LoadNewMoviesAsync();
-        Console.WriteLine("Refreshing...");
-        nav.NavigateTo("/movies");
+        movies = null;
+        await GetMoviesAsync(--pageCounter);
     }
 
-    private void OpenDetails(int id)
+    private void OpenMovieDetails(int id)
     {
+        // TODO: Add page number to cookies to navigate back to same page - Aldís 18.05.23
         nav.NavigateTo($"/MovieDetails/{id}");
     }
 }

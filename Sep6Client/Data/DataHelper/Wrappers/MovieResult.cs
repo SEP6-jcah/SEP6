@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Sep6Client.Data.TMDB.DataHelper
+namespace Sep6Client.Data.DataHelper.Wrappers
 {
-    public class TmdbMovieResult
+    public class MovieResult
     {
         [Required]
         [JsonPropertyName("id"), Key]
