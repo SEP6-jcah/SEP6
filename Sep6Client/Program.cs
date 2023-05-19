@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sep6Client.Data.Movies;
-using Sep6Client.Data.TMDB;
 
 
 var builder = WebApplication.CreateBuilder(args);
