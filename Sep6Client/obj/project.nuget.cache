@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "P1rg99KzyFpoUu5/Iv2yOTH2tf0WGJzQtlAjVgQnO+lVZmbOeisDa1f77Urz3x+0g/B7tPY1qT+L3RAsUA9mmQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\sep6client\\Sep6Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Bruger\\.nuget\\packages\\restsharp\\110.2.0\\restsharp.110.2.0.nupkg.sha512",
+    "C:\\Users\\Bruger\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\Bruger\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

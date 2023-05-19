@@ -1,0 +1,42 @@
+@page "/MovieDetails/{Id:int}"
+@using Sep6Client.Model
+@using Sep6Client.Data.Movies
+@inject IMoviesService moviesService
+@inject NavigationManager nav
+
+<PageTitle>Movie Details</PageTitle>
+
+@if (movie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>@movie.Title</h1>
+    @*<img src="@movie.Poster" alt="Official movie poster."/>*@
+    <p>ID: @Id</p>
+    <p>Rating: @movie.Rating/10</p>
+    <p>@movie.Description</p>
+}
+
+<p style="color: red">@errorMessage</p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Movie? movie;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            movie = await moviesService.GetMovieByIdAsync(Id);
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+}
