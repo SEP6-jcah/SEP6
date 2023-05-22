@@ -1,24 +1,28 @@
-@page "/Movies"
+@page "/SearchMovies"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
+@using Sep6Client.Data.DataHelper
 @inject IMoviesService moviesService
 @inject NavigationManager nav
 
-<PageTitle>Movies</PageTitle>
-<h1>Movies</h1>
+<PageTitle>Search</PageTitle>
+<h1>Search movies</h1>
 
-@if (movies == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
+<p><em>Enter a title to search for and press the 'Search' button.</em></p>
+
+    <div>
+        <InputText @bind-Value="searchText"></InputText>
+        <button @onclick="SearchMoviesAsync">Search</button>
+        <br/>
+    </div>
+
+@if (movies != null)
 {
     <div>
         <table class="table">
             <thead>
             <tr>
                 <th>Title</th>
-                <th>ID</th>
                 <th>Rating</th>
             </tr>
             </thead>
@@ -28,7 +32,6 @@ else
                 var id = movie.Id;
                 <tr>
                     <td><a @onclick="() => OpenMovieDetails(id)">@movie.Title</a></td>
-                    <td>@movie.Id</td>
                     <td>@movie.Rating/10</td>
                 </tr>
             }
@@ -51,17 +54,27 @@ else
     private int pageCounter = 1;
     private string errorMessage = "";
     private char leftArrow = '<';
-    
-    protected override async Task OnInitializedAsync()
+    private Dictionary<SearchFilterOptions, string>? searchCriteria;
+    private string searchText = "";
+
+    protected override void OnInitialized()
     {
-        await GetMoviesAsync(pageCounter);
+        // TODO: Load page nr & search filters from session - Aldís 19.05.23
+        searchCriteria = new Dictionary<SearchFilterOptions, string>
+        {
+            {SearchFilterOptions.PageNr, pageCounter.ToString()},
+            {SearchFilterOptions.Text, searchText},
+            {SearchFilterOptions.SortBy, QueryHelper.GetSortByOptions().First()}
+        };
+        base.OnInitialized();
     }
 
-    private async Task GetMoviesAsync(int pageNr)
+    private async Task SearchMoviesAsync()
     {
+        UpdateSearchCriteria();
         try
         {
-            movies = await moviesService.GetBrowsingMoviesAsync(pageNr);
+            movies = await moviesService.GetFilteredMoviesAsync(searchCriteria);
         }
         catch(Exception e)
         {
@@ -70,16 +83,23 @@ else
         }
     }
 
+    private void UpdateSearchCriteria()
+    {
+        searchCriteria[SearchFilterOptions.PageNr] = pageCounter.ToString();
+        searchCriteria[SearchFilterOptions.Text] = searchText;
+        Console.WriteLine($"Updating search criteria...\nPage count = {pageCounter}\nSearch text: {searchText}\n---------------------\n");
+    }
+
     private async Task OnLoadNextPage()
     {
-        movies = null;
-        await GetMoviesAsync(++pageCounter);
+        pageCounter++;
+        await SearchMoviesAsync();
     }
     
     private async Task OnLoadPreviousPage()
     {
-        movies = null;
-        await GetMoviesAsync(--pageCounter);
+        pageCounter--;
+        await SearchMoviesAsync();
     }
 
     private void OpenMovieDetails(int id)
