@@ -11,7 +11,7 @@ namespace Sep6Client.Data.DataHelper
         private string page = "&page=";
         private string text = "&query=";
         private string sort = "&sort_by=";
-        private readonly string[] sortOptions = {"popularity", "vote_average", "primary_release_date"};
+        private readonly string[] sortOptions = {"popularity", "vote_average"};
         private readonly string[] sortOrderOptions = { ".desc", ".asc"};
 
         public static string[] GetSortByOptions()
@@ -21,26 +21,24 @@ namespace Sep6Client.Data.DataHelper
         
         public string GetSearchQuery(Dictionary<SearchFilterOptions, string> criteria)
         {
-            return baseSearchQuery + GetQueryParameters(criteria);
+            return baseSearchQuery + GetSearchQueryParameters(criteria);
         }
 
         public string GetBrowseQuery(Dictionary<SearchFilterOptions, string> criteria)
         {
-            return baseBrowseQuery + GetQueryParameters(criteria);
+            return baseBrowseQuery + GetBrowseQueryParameters(criteria);
         }
 
-        private string GetQueryParameters(Dictionary<SearchFilterOptions, string> criteria)
+        private string GetSearchQueryParameters(Dictionary<SearchFilterOptions, string> criteria)
         {
             var result = "";
             var searchText = "";
             var pageNr = "";
-            var sortBy = "";
-
+            
             try
             {
                 searchText = criteria[SearchFilterOptions.Text];
                 pageNr = criteria[SearchFilterOptions.PageNr];
-                sortBy = criteria[SearchFilterOptions.SortBy];
             }
             catch (NullReferenceException e)
             {
@@ -50,6 +48,30 @@ namespace Sep6Client.Data.DataHelper
             if (!string.IsNullOrEmpty(searchText))
             {
                 result += text + searchText.Replace(' ', '+');
+            }
+
+            if (!string.IsNullOrEmpty(pageNr))
+            {
+                result += page + pageNr;
+            }
+            
+            return result;
+        }
+
+        private string GetBrowseQueryParameters(Dictionary<SearchFilterOptions, string> criteria)
+        {
+            var result = "";
+            var pageNr = "";
+            var sortBy = "";
+
+            try
+            {
+                pageNr = criteria[SearchFilterOptions.PageNr];
+                sortBy = criteria[SearchFilterOptions.SortBy];
+            }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine(e);
             }
 
             if (!string.IsNullOrEmpty(pageNr))

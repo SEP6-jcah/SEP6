@@ -1,41 +1,28 @@
-@page "/Movies"
+@page "/SearchMovies"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
 @using Sep6Client.Data.DataHelper
 @inject IMoviesService moviesService
 @inject NavigationManager nav
 
-<PageTitle>Movies</PageTitle>
-<h1>Movies</h1>
+<PageTitle>Search</PageTitle>
+<h1>Search movies</h1>
 
-@if (movies == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
+<p><em>Enter a title to search for and press the 'Search' button.</em></p>
+
     <div>
         <InputText @bind-Value="searchText"></InputText>
-        <button @onclick="RefreshMoviesAsync">Search</button>
+        <button @onclick="SearchMoviesAsync">Search</button>
         <br/>
     </div>
-    @* <div> *@
-    @*     <p>Sort by: </p> *@
-    @*     <InputRadioGroup @bind-Value="selectedSortOption" @onclick="RefreshMoviesAsync"> *@
-    @*         @for (var i = 0; i < sortOptions.Length; i++) *@
-    @*         { *@
-    @*             <p> *@
-    @*                 <InputRadio Value="@sortOptions[i]" @onclick="RefreshMoviesAsync"/> @sortOptions[i] *@
-    @*             </p> *@
-    @*         } *@
-    @*     </InputRadioGroup> *@
-    @* </div> *@
+
+@if (movies != null)
+{
     <div>
         <table class="table">
             <thead>
             <tr>
                 <th>Title</th>
-                <th>ID</th>
                 <th>Rating</th>
             </tr>
             </thead>
@@ -45,7 +32,6 @@ else
                 var id = movie.Id;
                 <tr>
                     <td><a @onclick="() => OpenMovieDetails(id)">@movie.Title</a></td>
-                    <td>@movie.Id</td>
                     <td>@movie.Rating/10</td>
                 </tr>
             }
@@ -68,54 +54,24 @@ else
     private int pageCounter = 1;
     private string errorMessage = "";
     private char leftArrow = '<';
-    private Dictionary<SearchFilterOptions, string> searchCriteria;
+    private Dictionary<SearchFilterOptions, string>? searchCriteria;
     private string searchText = "";
-    private readonly string[] sortOptions = QueryHelper.GetSortByOptions();
-    private string selectedSortOption;
-    // TODO: Add sort order - Aldís 19.05.23
-    
-    protected override async Task OnInitializedAsync()
+
+    protected override void OnInitialized()
     {
         // TODO: Load page nr & search filters from session - Aldís 19.05.23
-        selectedSortOption = sortOptions.First();
         searchCriteria = new Dictionary<SearchFilterOptions, string>
         {
             {SearchFilterOptions.PageNr, pageCounter.ToString()},
             {SearchFilterOptions.Text, searchText},
-            {SearchFilterOptions.SortBy, selectedSortOption}
+            {SearchFilterOptions.SortBy, QueryHelper.GetSortByOptions().First()}
         };
-        
-        await RefreshMoviesAsync();
-    }
-
-    private async Task RefreshMoviesAsync()
-    {
-        UpdateSearchCriteria();
-
-        if (string.IsNullOrEmpty(searchText))
-        {
-            await GetBrowseMoviesAsync();
-            return;
-        }
-
-        await SearchMoviesAsync();
-    }
-
-    private async Task GetBrowseMoviesAsync()
-    {
-        try
-        {
-            movies = await moviesService.GetBrowsingMoviesAsync(searchCriteria);
-        }
-        catch(Exception e)
-        {
-            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
-            await Console.Out.WriteLineAsync(e.StackTrace);
-        }
+        base.OnInitialized();
     }
 
     private async Task SearchMoviesAsync()
     {
+        UpdateSearchCriteria();
         try
         {
             movies = await moviesService.GetFilteredMoviesAsync(searchCriteria);
@@ -131,22 +87,19 @@ else
     {
         searchCriteria[SearchFilterOptions.PageNr] = pageCounter.ToString();
         searchCriteria[SearchFilterOptions.Text] = searchText;
-        // TODO: Sort order breaks when you search by string as one queries search and the other discover, TBC - Aldís 19.05.23
-        // searchCriteria[SearchFilterOptions.SortBy] = selectedSortOption;
-        // Console.WriteLine($"Updating search criteria...\nPage count = {pageCounter}\nSort by: {selectedSortOption}\nSearch text: {searchText}\n---------------------\n");
         Console.WriteLine($"Updating search criteria...\nPage count = {pageCounter}\nSearch text: {searchText}\n---------------------\n");
     }
 
     private async Task OnLoadNextPage()
     {
         pageCounter++;
-        await RefreshMoviesAsync();
+        await SearchMoviesAsync();
     }
     
     private async Task OnLoadPreviousPage()
     {
         pageCounter--;
-        await RefreshMoviesAsync();
+        await SearchMoviesAsync();
     }
 
     private void OpenMovieDetails(int id)

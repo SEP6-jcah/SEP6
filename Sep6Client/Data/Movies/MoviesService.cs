@@ -47,9 +47,9 @@ namespace Sep6Client.Data.Movies
             return httpResponse ?? throw new HttpRequestException("Unmarshalling TMDB movies http response failed.");
         }
 
-        public async Task<IList<Movie>> GetBrowsingMoviesAsync(Dictionary<SearchFilterOptions, string> searchCriteria)
+        public async Task<IList<Movie>> GetBrowsingMoviesAsync(Dictionary<SearchFilterOptions, string> filters)
         {
-            var query = queryHelper.GetBrowseQuery(searchCriteria);
+            var query = queryHelper.GetBrowseQuery(filters);
             Console.WriteLine($"Sending query to: {BaseUri}{query}");
 
             var response = await GetMoviesAsync(query);
@@ -104,6 +104,7 @@ namespace Sep6Client.Data.Movies
             
             return httpResponse ?? throw new HttpRequestException("Unmarshalling TMDB movies http response failed.");
         }
+        
         public async Task<Movie> GetMovieByIdAsync(int id)
         {
             var response = await GetMovieAsync(id);

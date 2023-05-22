@@ -11,13 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/SearchFilterOptions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/SearchMovies.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +211,7 @@
       <workItem from="1684325778037" duration="4833000" />
       <workItem from="1684347150350" duration="405000" />
       <workItem from="1684483354109" duration="1226000" />
+      <workItem from="1684765683271" duration="7372000" />
     </task>
     <servers />
   </component>
