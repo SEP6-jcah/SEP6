@@ -37,6 +37,7 @@ namespace Sep6Client.Data.DataHelper.Wrappers
         [JsonPropertyName("vote_count")]
         public int Votes { get; set; }
         
+        // TODO: Link Persons to Movies - Aldís 22.05.23
         [JsonPropertyName("person_results")]
         public IList<string>? Actors { get; set; }
     }

@@ -57,7 +57,7 @@ namespace Sep6Client.Data.Movies
 
             try
             {
-                movies = response.Movies.Select(MovieMapper.ToTmdbMovie).ToList();
+                movies = response.Movies.Select(MovieMapper.ToMovie).ToList();
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace Sep6Client.Data.Movies
 
             try
             {
-                movies = response.Movies.Select(MovieMapper.ToTmdbMovie).ToList();
+                movies = response.Movies.Select(MovieMapper.ToMovie).ToList();
             }
             catch (Exception e)
             {
@@ -91,7 +91,7 @@ namespace Sep6Client.Data.Movies
 
         private async Task<MovieResult> GetMovieAsync(int id)
         {
-            var response = await client.GetAsync($"{BaseUri}/movie/{id}");
+            var response = await client.GetAsync($"{BaseUri}movie/{id}");
                         
             if (!response.IsSuccessStatusCode)
             {
@@ -102,7 +102,7 @@ namespace Sep6Client.Data.Movies
 
             var httpResponse = JsonSerializer.Deserialize<MovieResult>(stream, options);
             
-            return httpResponse ?? throw new HttpRequestException("Unmarshalling TMDB movies http response failed.");
+            return httpResponse ?? throw new HttpRequestException("Unmarshalling movies http response failed.");
         }
         
         public async Task<Movie> GetMovieByIdAsync(int id)
@@ -112,7 +112,7 @@ namespace Sep6Client.Data.Movies
             var movie = new Movie();
             try
             {
-                movie = MovieMapper.ToTmdbMovie(response);
+                movie = MovieMapper.ToMovie(response);
             }
             catch (Exception e)
             {

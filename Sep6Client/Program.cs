@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sep6Client.Data.Movies;
+using Sep6Client.Data.Person;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
 

@@ -11,12 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/SearchMovies.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/PersonMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/PersonListResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/PersonResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/IPersonService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/PersonService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/Person.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowsePersons.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/PersonDetails.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/MovieMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/MovieMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Movies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
