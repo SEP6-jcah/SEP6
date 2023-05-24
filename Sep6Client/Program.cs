@@ -3,27 +3,30 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sep6Client.Data.Movies;
 using Sep6Client.Data.TMDB;
-﻿using Firebase.Auth;
+using Firebase.Auth;
 using Firebase.Auth.Providers;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var firebaseApiKey = builder.Configuration.GetSection("Firebase:Api.Key").Value;
+var firebaseAuthDomain = builder.Configuration.GetSection("Firebase:Domain").Value;
 
 var firebaseConfig = new FirebaseAuthConfig
 {
-    ApiKey = "AIzaSyC9n3veZPuF3v2qS5QVKk9l681jzFVcoOA",
-    AuthDomain = "sep6-jcah.firebaseapp.com",
+    ApiKey = firebaseApiKey,
+    AuthDomain = firebaseAuthDomain,
     Providers = new FirebaseAuthProvider[]
     {
         new EmailProvider()
     }
 };
 
-var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 builder.Services.AddSingleton<FirebaseAuthClient>(new FirebaseAuthClient(firebaseConfig));
-//builder.Services.AddSingleton<FirebaseAuth>(new FirebaseAuthProvider(builder.Configuration.GetSection("FIREBASE_API_KEY")));
 
 
 var app = builder.Build();
