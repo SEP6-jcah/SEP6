@@ -10,6 +10,10 @@
     <input id="email" type="email" @bind="email" />
 </p>
 <p>
+    <label for="username">Username:</label>
+    <input id="username" type="username" @bind="username" />
+</p>
+<p>
     <label for="password">Password:</label>
     <input id="password" type="password" @bind="password" />
 </p>
@@ -22,13 +26,14 @@
 @code {
     private string errorMessage = "";
     private string? email;
+    private string? username;
     private string? password;
 
     private async Task SignUpUser()
     {
         try
         {
-            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
+            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password,username);
             //await SignUpSuccessful(auth.User);
         }
         catch (Exception e)

@@ -4,11 +4,16 @@ using Microsoft.Extensions.Hosting;
 using Sep6Client.Data.Movies;
 using Sep6Client.Data.TMDB;
 ﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
 
 var firebaseConfig = new FirebaseAuthConfig
 {
     ApiKey = "AIzaSyC9n3veZPuF3v2qS5QVKk9l681jzFVcoOA",
     AuthDomain = "sep6-jcah.firebaseapp.com",
+    Providers = new FirebaseAuthProvider[]
+    {
+        new EmailProvider()
+    }
 };
 
 var builder = WebApplication.CreateBuilder(args);
