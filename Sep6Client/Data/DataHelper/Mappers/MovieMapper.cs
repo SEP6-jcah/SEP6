@@ -1,9 +1,8 @@
 using System;
-using System.Linq;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
 
-namespace Sep6Client.Data.DataHelper
+namespace Sep6Client.Data.DataHelper.Mappers
 {
     public static class MovieMapper
     {
@@ -11,8 +10,6 @@ namespace Sep6Client.Data.DataHelper
         {
             try
             {
-                // TODO: Link Persons to Movies - Aldís 22.05.23
-                // var actors = result.Actors.Select(PersonMapper.ToPerson).ToList();
                 return new Movie
                 {
                     Id = result.Id,
@@ -21,8 +18,6 @@ namespace Sep6Client.Data.DataHelper
                     Poster = result.Poster,
                     Rating = result.Rating,
                     Votes = result.Votes,
-                    // Actors = actors,
-                    Actors = result.Actors,
                     ReleaseDate = result.ReleaseDate,
                     Language = result.Language
                 };

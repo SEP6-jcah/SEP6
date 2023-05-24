@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,8 +6,9 @@ using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Sep6Client.Data.DataHelper;
+using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
-using Sep6Client.Data.Movies;
+using Sep6Client.Model;
 
 namespace Sep6Client.Data.Person
 {
@@ -18,7 +18,6 @@ namespace Sep6Client.Data.Person
         private const string BaseUri = "https://api.themoviedb.org/3/";
         private const string ApiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2YxNmY4ZDRmYTE4ZDhmZTY2MTZlNDcyYWJhMjNhMCIsInN1YiI6IjY0NjVkNjA3MDA2YjAxMDEwNTg4Y2ZkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RCfsqHoolmtYr-oCW7DLtmdlR1zqfeJz2NUkPvgBQZg";
         private readonly JsonSerializerOptions options;
-        private readonly MoviesService moviesService = new ();
 
         public PersonService()
         {
@@ -48,14 +47,22 @@ namespace Sep6Client.Data.Person
             return httpResponse ?? throw new HttpRequestException("Unmarshalling persons http response failed.");
         }
 
-        public async Task<IList<Model.Person>> GetBrowsePersonsAsync(int pageNr)
+        public async Task<PersonList> GetBrowsePersonsAsync(int pageNr)
         {
             var response = await GetPersonsAsync(pageNr);
-            var persons = new List<Model.Person>();
+            var persons = new PersonList
+            {
+                Persons = new List<Model.Person>(),
+                NrOfPages = 0,
+                NrOfResults = 0
+            };
 
             try
             {
-                persons = response.Persons.Select(PersonMapper.ToPerson).ToList();
+                foreach (var person in response.Persons)
+                {
+                    persons.Persons.Add(PersonMapper.ToPerson(person));
+                }
             }
             catch (Exception e)
             {
@@ -66,22 +73,62 @@ namespace Sep6Client.Data.Person
             return persons;
         }
 
-        public async Task<IList<Model.Person>> GetCrewByMovieId(int movieId)
+        private async Task<int> GetResultPagesAsync(string movieTitle)
         {
-            var movie = await moviesService.GetMovieByIdAsync(movieId);
-            var crew = new List<Model.Person>();
-
-            try
+            if (string.IsNullOrWhiteSpace(movieTitle))
+                return 0;
+            var response = await client.GetAsync($"{BaseUri}search/person?query={movieTitle}");
+            
+            if (!response.IsSuccessStatusCode)
             {
-                crew.AddRange(movie.Actors.Select(PersonMapper.ToPerson).ToList());
+                throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
             }
-            catch (Exception e)
+            
+            var stream = await response.Content.ReadAsStreamAsync();
+
+            var httpResponse = JsonSerializer.Deserialize<PersonListResult>(stream);
+
+            return httpResponse?.NrOfPages ?? 0;
+        }
+        private async Task<PersonListResult> GetCrewAsync(string movieTitle)
+        {
+            var resultPageCount = await GetResultPagesAsync(movieTitle);
+            var personList = new PersonListResult
             {
-                Console.WriteLine($"{e.Message}\n{e.StackTrace}");
-                throw new FormatException($"Failed to map crew from movie with ID {movieId}: {e.Message}\n{e.StackTrace}");
+                Persons = new List<PersonResult>(),
+                NrOfPages = 0
+            };
+
+            for (var i = 0; i < resultPageCount; i++)
+            {
+                var response = await client.GetAsync($"{BaseUri}search/person?query={movieTitle}");
+                // Console.WriteLine($"\n\n\nQuery in GetCrewAsync l 92: {BaseUri}search/person?query={movieTitle}\n\n\n");
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
+                }
+                
+                var stream = await response.Content.ReadAsStreamAsync();
+                var httpResponse = JsonSerializer.Deserialize<PersonListResult>(stream, options);
+                
+
+                try
+                {
+                    // Console.WriteLine($"\n\n\nCrew size in GetCrewAsync l 92: {httpResponse.Persons.Count}\n\n\n");
+
+                    foreach (var person in httpResponse.Persons)
+                    {
+                        personList.Persons.Add(person);
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new HttpRequestException($"No crew found for {movieTitle}", e);
+                }
             }
 
-            return crew;
+            return personList;
         }
 
         private async Task<PersonResult> GetPersonAsync(int id)

@@ -34,7 +34,7 @@ else
             </tr>
             </thead>
             <tbody>
-            @foreach (var movie in movies)
+            @foreach (var movie in movies.Movies)
             {
                 var id = movie.Id;
                 <tr>
@@ -57,7 +57,7 @@ else
 <p style="color: red">@errorMessage</p>
 
 @code {
-    private IList<Movie>? movies;
+    private MovieList? movies;
     private int pageCounter = 1;
     private string errorMessage = "";
     private char leftArrow = '<';

@@ -16,7 +16,7 @@
         <br/>
     </div>
 
-@if (movies != null)
+@if (movies != null && movies.Movies.Count > 0)
 {
     <div>
         <table class="table">
@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var movie in movies)
+            @foreach (var movie in movies.Movies)
             {
                 var id = movie.Id;
                 <tr>
@@ -40,38 +40,43 @@
     </div>
     
     <div>
-         @if (pageCounter > 1)
-         {
-             <button @onclick="OnLoadPreviousPage">@leftArrow-- Previous</button>
-         }
-         <button @onclick="OnLoadNextPage">Next --></button>
+        @if (pageCounter > 1)
+        {
+            <button @onclick="OnLoadPreviousPage">@leftArrow-- Previous</button>
+        }
+
+        @if (pageCounter < movies.NrOfPages)
+        {
+            <button @onclick="OnLoadNextPage">Next --></button>
+        }
      </div>
 }
 <p style="color: red">@errorMessage</p>
 
 @code {
-    private IList<Movie>? movies;
+    private string searchText = "";
+    private MovieList? movies;
     private int pageCounter = 1;
     private string errorMessage = "";
     private char leftArrow = '<';
     private Dictionary<SearchFilterOptions, string>? searchCriteria;
-    private string searchText = "";
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        // TODO: Load page nr & search filters from session - Aldís 19.05.23
         searchCriteria = new Dictionary<SearchFilterOptions, string>
         {
             {SearchFilterOptions.PageNr, pageCounter.ToString()},
             {SearchFilterOptions.Text, searchText},
             {SearchFilterOptions.SortBy, QueryHelper.GetSortByOptions().First()}
         };
-        base.OnInitialized();
+
+        await SearchMoviesAsync();
     }
 
     private async Task SearchMoviesAsync()
     {
         UpdateSearchCriteria();
+        
         try
         {
             movies = await moviesService.GetFilteredMoviesAsync(searchCriteria);
@@ -95,7 +100,7 @@
         pageCounter++;
         await SearchMoviesAsync();
     }
-    
+
     private async Task OnLoadPreviousPage()
     {
         pageCounter--;

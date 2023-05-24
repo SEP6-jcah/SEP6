@@ -6,8 +6,8 @@ namespace Sep6Client.Data.DataHelper
 {
     public class QueryHelper
     {
-        private string baseBrowseQuery = "/discover/movie?include_adult=false&include_video=false";
-        private string baseSearchQuery = "/search/movie?include_adult=false&include_video=false";
+        private string baseBrowseQuery = "discover/movie?include_adult=false&include_video=false";
+        private string baseSearchQuery = "search/movie?include_adult=false&include_video=false";
         private string page = "&page=";
         private string text = "&query=";
         private string sort = "&sort_by=";

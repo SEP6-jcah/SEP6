@@ -11,20 +11,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/PersonMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/PersonListResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/PersonResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/IPersonService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/PersonService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/Person.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowsePersons.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sep6Client/Pages/PersonDetails.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/Crew/CastAndCrewService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/Crew/ICastAndCrewService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/ActorMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/CrewMemberMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/ActorResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/CastAndCrewListResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/CrewMemberResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/Actor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/CrewMember.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/MovieList.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sep6Client/Model/PersonList.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/MovieMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/MovieMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieService/Tests/MoviesControllerTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MovieService/Tests/MoviesControllerTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/MovieMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/MovieMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/PersonMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/PersonMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/QueryHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieListResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieListResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/PersonListResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/PersonListResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Person/IPersonService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/IPersonService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Person/PersonService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/PersonService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/BrowsePersons.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowsePersons.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/SearchMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/SearchMovies.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
     </list>
@@ -53,6 +67,7 @@
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Tests/Usings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/Error.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PdqswVXEp7CBAsoVXu3YyJoweT" />
@@ -221,6 +236,7 @@
       <workItem from="1684347150350" duration="405000" />
       <workItem from="1684483354109" duration="1226000" />
       <workItem from="1684765683271" duration="7372000" />
+      <workItem from="1684912703839" duration="28909000" />
     </task>
     <servers />
   </component>

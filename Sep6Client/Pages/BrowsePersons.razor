@@ -20,7 +20,7 @@ else
             </tr>
             </thead>
             <tbody>
-            @foreach (var person in persons)
+            @foreach (var person in persons.Persons)
             {
                 var id = person.Id;
                 <tr>
@@ -44,7 +44,7 @@ else
 <p style="color: red">@errorMessage</p>
 
 @code {
-    private IList<Person>? persons;
+    private PersonList? persons;
     private int pageCounter = 1;
     private string errorMessage = "";
     private char leftArrow = '<';

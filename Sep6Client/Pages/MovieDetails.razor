@@ -1,7 +1,9 @@
 @page "/MovieDetails/{Id:int}"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
+@using Sep6Client.Data.Person
 @inject IMoviesService moviesService
+@inject IPersonService personService
 @inject NavigationManager nav
 
 <PageTitle>Movie Details</PageTitle>
@@ -17,6 +19,27 @@ else
     <p>ID: @Id</p>
     <p>Rating: @movie.Rating/10</p>
     <p>@movie.Description</p>
+    @if (movie.Crew is {Count: > 0 })
+    {
+        <h3><br/><b>Cast</b></h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Character</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in movie.Actors)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.Character</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
 }
 
 <p style="color: red">@errorMessage</p>
@@ -29,7 +52,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        // TODO: Link Persons to Movies - Aldís 22.05.23
         try
         {
             movie = await moviesService.GetMovieByIdAsync(Id);
