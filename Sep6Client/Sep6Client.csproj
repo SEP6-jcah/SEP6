@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FirebaseAuthentication.net" Version="4.0.2" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 

@@ -1,0 +1,46 @@
+@page "/SignUp"
+@using Firebase.Auth
+@inject NavigationManager nav
+@inject FirebaseAuthClient authProvider
+
+<h3>Sign Up</h3>
+
+<p>
+    <label for="email">Email:</label>
+    <input id="email" type="email" @bind="email" />
+</p>
+<p>
+    <label for="password">Password:</label>
+    <input id="password" type="password" @bind="password" />
+</p>
+<button @onclick="SignUpUser">Sign Up</button>
+
+<p>Already have an account? <a href="/Login">Login</a></p>
+<p style="color: red">@errorMessage</p>
+
+
+@code {
+    private string errorMessage = "";
+    private string? email;
+    private string? password;
+
+    private async Task SignUpUser()
+    {
+        try
+        {
+            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password);
+            //await SignUpSuccessful(auth.User);
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private async Task SignUpSuccessful(User user)
+    {
+        // Perform any necessary actions after successful sign-up
+        nav.NavigateTo("/");
+    }
+}
