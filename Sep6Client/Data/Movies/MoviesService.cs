@@ -129,8 +129,16 @@ namespace Sep6Client.Data.Movies
             try
             {
                 movie = MovieMapper.ToMovie(response);
-                movie.Crew = await castAndCrewService.GetCrewByMovieIdAsync(id);
+                // Adding crew & cast
                 movie.Actors = await castAndCrewService.GetActorsByMovieIdAsync(id);
+                movie.Crew = await castAndCrewService.GetCrewByMovieIdAsync(id);
+                // Singling out the directors
+                foreach (var person in movie.Crew)
+                {
+                    if (!person.Job.Equals("Director")) continue;
+                
+                    movie.Directors.Add(person);
+                }
             }
             catch (Exception e)
             {

@@ -9,6 +9,6 @@ namespace Sep6Client.Model
         public double PopularityRating { get; set; }
         public string ProfileLink { get; set; }
         public string Department { get; set; }
-        public string JobDescription { get; set; }
+        public string Job { get; set; }
     }
 }

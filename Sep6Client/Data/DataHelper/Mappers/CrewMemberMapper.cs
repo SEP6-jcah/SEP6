@@ -19,7 +19,7 @@ namespace Sep6Client.Data.DataHelper.Mappers
                     PopularityRating = result.PopularityRating,
                     ProfileLink = result.ProfileLink,
                     Department = result.Department,
-                    JobDescription = result.JobDescription
+                    Job = result.Job
                 };
             }
             catch (Exception e)

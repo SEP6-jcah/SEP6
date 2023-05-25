@@ -31,6 +31,7 @@ else
             <tr>
                 <th>Title</th>
                 <th>Rating</th>
+                <th>Release Date</th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +41,7 @@ else
                 <tr>
                     <td><a @onclick="() => OpenMovieDetails(id)">@movie.Title</a></td>
                     <td>@movie.Rating/10</td>
+                    <td>@movie.ReleaseDate</td>
                 </tr>
             }
             </tbody>

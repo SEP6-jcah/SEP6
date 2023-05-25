@@ -26,6 +26,6 @@ namespace Sep6Client.Data.DataHelper.Wrappers
         public string Department { get; set; }
         
         [JsonPropertyName("job")]
-        public string JobDescription { get; set; }
+        public string Job { get; set; }
     }
 }
