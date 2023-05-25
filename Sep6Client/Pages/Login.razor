@@ -1,0 +1,45 @@
+@page "/Login"
+@inject NavigationManager nav
+@inject FirebaseAuthClient authProvider
+@inject IToastService toast
+
+<h3>Login</h3>
+
+<p>
+    <label for="email">Email:</label>
+    <input id="email" type="email" @bind="email" />
+</p>
+<p>
+    <label for="password">Password:</label>
+    <input id="password" type="password" @bind="password" />
+</p>
+<button @onclick="LoginUser">Login</button>
+
+<p>Don't have an account? <a href="/SignUp">Sign Up</a></p>
+
+
+@code {
+    private string? email;
+    private string? password;
+
+    private async Task LoginUser()
+    {
+        try
+        {
+            var userCredential = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
+            var user = userCredential.User;
+            LoginSuccessful(user);
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("Login Failed!");
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private void LoginSuccessful(User user)
+    {
+        toast.ShowSuccess("Login Successful!");
+        nav.NavigateTo("/");
+    }
+}
