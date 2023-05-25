@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject FirebaseAuthClient authProvider
+@inject IToastService toast
 
 <PageTitle>Sep6Client</PageTitle>
 
@@ -9,11 +11,38 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+            @if (authProvider.User is not null)
+            {
+                <span>
+                    Welcome, @authProvider.User.Info.DisplayName!
+                </span>
+                <NavLink class="nav-link" @onclick="LogoutUser">
+                    <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
+                </NavLink>
+            }else
+            {
 
+                <NavLink class="nav-link" href="/Login">
+                    <span class="oi oi-account-login" aria-hidden="true"></span> Login
+                </NavLink>
+            }
+        </div>
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+<BlazoredToasts Position="ToastPosition.BottomCenter"
+                Timeout="10"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-thumbs-up"
+                ErrorIcon="fa fa-bug" />
+
+@code {
+    private void LogoutUser()
+    {
+        authProvider.SignOut();
+        toast.ShowSuccess("Logout Successful!");
+    }
+}

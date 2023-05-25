@@ -5,6 +5,7 @@ using Sep6Client.Data.Movies;
 using Sep6Client.Data.TMDB;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Blazored.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 builder.Services.AddSingleton<FirebaseAuthClient>(new FirebaseAuthClient(firebaseConfig));
+builder.Services.AddBlazoredToast();
+
 
 
 var app = builder.Build();
