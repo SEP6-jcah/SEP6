@@ -12,9 +12,9 @@ namespace Sep6Client.Model
         public string Poster { get; set; }
         public float Rating { get; set; }
         public int Votes { get; set; }
-        public IList<string>? Actors { get; set; }
-        
-        // public IList<string>? Directors { get; set; }
+        public IList<CrewMember>? Directors { get; set; }
+        public IList<CrewMember>? Crew { get; set; }
+        public IList<Actor>? Actors { get; set; }
         public string? ReleaseDate { get; set; }
         public string Language { get; set; }
     }

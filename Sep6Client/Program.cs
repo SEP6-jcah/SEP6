@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sep6Client.Data.Crew;
 using Sep6Client.Data.Movies;
+using Sep6Client.Data.Person;
 using Sep6Client.Data.TMDB;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Blazored.Toast;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,8 @@ var firebaseConfig = new FirebaseAuthConfig
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<ICastAndCrewService, CastAndCrewService>();
 builder.Services.AddSingleton<FirebaseAuthClient>(new FirebaseAuthClient(firebaseConfig));
 builder.Services.AddBlazoredToast();
 

@@ -1,0 +1,40 @@
+@page "/PersonDetails/{Id:int}"
+@using Sep6Client.Model
+@using Sep6Client.Data.Person
+@inject IPersonService personService
+
+<PageTitle>Person Details</PageTitle>
+
+@if (person == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h1>@person.Name</h1>
+    <p>ID: @Id</p>
+    <p>Birthday: @person.Birthday</p>
+    <p>@person.Biography</p>  
+}
+
+<p style="color: red">@errorMessage</p>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    private Person? person;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            person = await personService.GetPersonByIdAsync(Id);
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+}

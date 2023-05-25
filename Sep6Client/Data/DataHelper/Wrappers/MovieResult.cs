@@ -36,8 +36,5 @@ namespace Sep6Client.Data.DataHelper.Wrappers
         
         [JsonPropertyName("vote_count")]
         public int Votes { get; set; }
-        
-        [JsonPropertyName("person_results")]
-        public IList<string>? Actors { get; set; }
     }
 }

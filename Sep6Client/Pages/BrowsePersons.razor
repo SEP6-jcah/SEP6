@@ -1,0 +1,86 @@
+@page "/BrowsePersons"
+@using Sep6Client.Data.Person
+@using Sep6Client.Model
+@inject IPersonService personService
+@inject NavigationManager nav
+<h3>People</h3>
+
+@if (persons == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Profession</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in persons.Persons)
+            {
+                var id = person.Id;
+                <tr>
+                    <td><a @onclick="() => OpenPersonDetails(id)">@person.Name</a></td>
+                    <td>@person.Department</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    
+    <div>
+        @if (pageCounter > 1)
+        {
+            <button @onclick="OnLoadPreviousPage">@leftArrow-- Previous</button>
+        }
+        <button @onclick="OnLoadNextPage">Next --></button>
+    </div>
+}
+
+<p style="color: red">@errorMessage</p>
+
+@code {
+    private PersonList? persons;
+    private int pageCounter = 1;
+    private string errorMessage = "";
+    private char leftArrow = '<';
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetPersonsAsync();
+    }
+
+    private async Task GetPersonsAsync()
+    {
+        try
+        {
+            persons = await personService.GetBrowsePersonsAsync(pageCounter);
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private async Task OnLoadPreviousPage()
+    {
+        pageCounter--;
+        await GetPersonsAsync();
+    }
+
+    private async Task OnLoadNextPage()
+    {
+        pageCounter++;
+        await GetPersonsAsync();
+    }
+
+    private void OpenPersonDetails(int id)
+    {
+        nav.NavigateTo($"/PersonDetails/{id}");
+    }
+}
