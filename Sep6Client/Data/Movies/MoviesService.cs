@@ -10,22 +10,25 @@ using Sep6Client.Data.DataHelper;
 using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
+using Microsoft.Extensions.Options;
 
 namespace Sep6Client.Data.Movies
 {
     public class MoviesService : IMoviesService
     {
         private readonly HttpClient client;
-        private const string BaseUri = "https://api.themoviedb.org/3/";
-        private const string ApiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2YxNmY4ZDRmYTE4ZDhmZTY2MTZlNDcyYWJhMjNhMCIsInN1YiI6IjY0NjVkNjA3MDA2YjAxMDEwNTg4Y2ZkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RCfsqHoolmtYr-oCW7DLtmdlR1zqfeJz2NUkPvgBQZg";
+        private string baseUri;
+        private string apiKey;
         private readonly JsonSerializerOptions options;
         private readonly QueryHelper queryHelper;
-        private CastAndCrewService castAndCrewService = new();
+        private CastAndCrewService castAndCrewService;
         
-        public MoviesService()
+        public MoviesService(IOptions<TmdbSettings> tmdbSettings)
         {
             client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApiKey);
+            baseUri = tmdbSettings.Value.BaseUri;
+            apiKey = tmdbSettings.Value.ApiKey;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             options = new JsonSerializerOptions
             {
@@ -33,11 +36,13 @@ namespace Sep6Client.Data.Movies
                 PropertyNameCaseInsensitive = true
             };
             queryHelper = new QueryHelper();
+            castAndCrewService = new (tmdbSettings);
         }
 
         private async Task<MovieListResult> GetMoviesAsync(string query)
         {
-            var response = await client.GetAsync(BaseUri + query);
+            Console.WriteLine(baseUri + query);
+            var response = await client.GetAsync(baseUri + query);
             
             if (!response.IsSuccessStatusCode)
             {
@@ -54,7 +59,6 @@ namespace Sep6Client.Data.Movies
         public async Task<MovieList> GetBrowsingMoviesAsync(Dictionary<SearchFilterOptions, string> filters)
         {
             var query = queryHelper.GetBrowseQuery(filters);
-            // Console.WriteLine($"Sending query to: {BaseUri}{query}");
 
             var response = await GetMoviesAsync(query);
             var movies = new MovieList
@@ -74,14 +78,12 @@ namespace Sep6Client.Data.Movies
                 throw new FormatException($"Failed to map movies: {e.Message}\n{e.StackTrace}");
             }
 
-            // Console.WriteLine($"\n___________\nNr of pages: {movies.NrOfPages}\n___________\n");
             return movies;
         }
 
         public async Task<MovieList> GetFilteredMoviesAsync(Dictionary<SearchFilterOptions, string> searchCriteria)
         {
             var query = queryHelper.GetSearchQuery(searchCriteria);
-            // Console.WriteLine($"Sending query to: {BaseUri}{query}\n--------------\n");
 
             var response = await GetMoviesAsync(query);
             var movies = new MovieList
@@ -101,13 +103,12 @@ namespace Sep6Client.Data.Movies
                 throw new FormatException($"Failed to map movies: {e.Message}\n{e.StackTrace}");
             }
 
-            // Console.WriteLine($"\n___________\nNr of pages: {movies.NrOfPages}\n___________\n");
             return movies;
         }
 
         private async Task<MovieResult> GetMovieAsync(int id)
         {
-            var response = await client.GetAsync($"{BaseUri}movie/{id}");
+            var response = await client.GetAsync($"{baseUri}movie/{id}");
                         
             if (!response.IsSuccessStatusCode)
             {

@@ -9,20 +9,23 @@ using Sep6Client.Data.DataHelper;
 using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
+using Microsoft.Extensions.Options;
 
 namespace Sep6Client.Data.Person
 {
     public class PersonService : IPersonService
     {
         private readonly HttpClient client;
-        private const string BaseUri = "https://api.themoviedb.org/3/";
-        private const string ApiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2YxNmY4ZDRmYTE4ZDhmZTY2MTZlNDcyYWJhMjNhMCIsInN1YiI6IjY0NjVkNjA3MDA2YjAxMDEwNTg4Y2ZkNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RCfsqHoolmtYr-oCW7DLtmdlR1zqfeJz2NUkPvgBQZg";
+        private string baseUri;
+        private string apiKey;
         private readonly JsonSerializerOptions options;
 
-        public PersonService()
+        public PersonService(IOptions<TmdbSettings> tmdbSettings)
         {
             client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApiKey);
+            baseUri = tmdbSettings.Value.BaseUri;
+            apiKey = tmdbSettings.Value.ApiKey;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             options = new JsonSerializerOptions
             {
@@ -33,7 +36,7 @@ namespace Sep6Client.Data.Person
 
         private async Task<PersonListResult> GetPersonsAsync(int pageNr)
         {
-            var response = await client.GetAsync($"{BaseUri}person/popular?page={pageNr}");
+            var response = await client.GetAsync($"{baseUri}person/popular?page={pageNr}");
             
             if (!response.IsSuccessStatusCode)
             {
@@ -77,7 +80,7 @@ namespace Sep6Client.Data.Person
         {
             if (string.IsNullOrWhiteSpace(movieTitle))
                 return 0;
-            var response = await client.GetAsync($"{BaseUri}search/person?query={movieTitle}");
+            var response = await client.GetAsync($"{baseUri}search/person?query={movieTitle}");
             
             if (!response.IsSuccessStatusCode)
             {
@@ -101,8 +104,7 @@ namespace Sep6Client.Data.Person
 
             for (var i = 0; i < resultPageCount; i++)
             {
-                var response = await client.GetAsync($"{BaseUri}search/person?query={movieTitle}");
-                // Console.WriteLine($"\n\n\nQuery in GetCrewAsync l 92: {BaseUri}search/person?query={movieTitle}\n\n\n");
+                var response = await client.GetAsync($"{baseUri}search/person?query={movieTitle}");
                 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -115,7 +117,6 @@ namespace Sep6Client.Data.Person
 
                 try
                 {
-                    // Console.WriteLine($"\n\n\nCrew size in GetCrewAsync l 92: {httpResponse.Persons.Count}\n\n\n");
 
                     foreach (var person in httpResponse.Persons)
                     {
@@ -133,7 +134,7 @@ namespace Sep6Client.Data.Person
 
         private async Task<PersonResult> GetPersonAsync(int id)
         {
-            var response = await client.GetAsync($"{BaseUri}person/{id}");
+            var response = await client.GetAsync($"{baseUri}person/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
