@@ -3,13 +3,13 @@ using System.Text.Json.Serialization;
 
 namespace Sep6Client.Data.DataHelper.Wrappers
 {
-    public class MovieListResult
+    public class PersonListResult
     {
         [JsonPropertyName("results")]
-        public IList<MovieResult> Movies { get; set; }
+        public IList<PersonResult> Persons { get; set; }
         [JsonPropertyName("total_pages")]
         public int NrOfPages { get; set; }
         [JsonPropertyName("total_results")]
-        public int NrOfMovies { get; set; }
+        public int NrOfResults { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 @page "/MovieDetails/{Id:int}"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
+@using Sep6Client.Data.Person
 @inject IMoviesService moviesService
+@inject IPersonService personService
 @inject NavigationManager nav
 
 <PageTitle>Movie Details</PageTitle>
@@ -14,9 +16,57 @@ else
 {
     <h1>@movie.Title</h1>
     @*<img src="@movie.Poster" alt="Official movie poster."/>*@
-    <p>ID: @Id</p>
-    <p>Rating: @movie.Rating/10</p>
-    <p>@movie.Description</p>
+    <p><b>ID:</b> @Id</p>
+    @if (movie.Directors is {Count: > 0})
+    {
+        <p><b>Director(s):</b> @GetPrettifiedDirectorList()</p>
+    }
+    <p><b>Release Date:</b> @movie.ReleaseDate</p>
+    <p><b>Rating:</b> @movie.Rating/10<br/>Based on @movie.Votes votes</p>
+    <p><b>Plot:</b><br/>@movie.Description</p>
+    @if (movie.Actors is {Count: > 0 })
+    {
+        <h3><br/><b>Cast</b></h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Character</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in movie.Actors)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.Character</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    
+    @if (movie.Crew is {Count: > 0 })
+    {
+        <h3><br/><b>Crew</b></h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Responsibility</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in movie.Crew)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.Job</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
 }
 
 <p style="color: red">@errorMessage</p>
@@ -38,5 +88,13 @@ else
             errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
+    }
+
+    private string GetPrettifiedDirectorList()
+    {
+        var temp = movie.Directors.Aggregate("", (current, director) => current + $"{director.Name}, ");
+
+        // Removing last two characters if there are any directors
+        return string.IsNullOrWhiteSpace(temp) ? temp : temp[..^2];
     }
 }
