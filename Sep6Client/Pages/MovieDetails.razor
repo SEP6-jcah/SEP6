@@ -37,8 +37,9 @@ else
             <tbody>
             @foreach (var person in movie.Actors)
             {
+                var id = person.PersonId;
                 <tr>
-                    <td>@person.Name</td>
+                    <td><a @onclick="() => OpenPersonDetails(id)">@person.Name</a></td>
                     <td>@person.Character</td>
                 </tr>
             }
@@ -59,8 +60,9 @@ else
             <tbody>
             @foreach (var person in movie.Crew)
             {
+                var id = person.PersonId;
                 <tr>
-                    <td>@person.Name</td>
+                    <td><a @onclick="() => OpenPersonDetails(id)">@person.Name</a></td>
                     <td>@person.Job</td>
                 </tr>
             }
@@ -96,5 +98,10 @@ else
 
         // Removing last two characters if there are any directors
         return string.IsNullOrWhiteSpace(temp) ? temp : temp[..^2];
+    }
+
+    private void OpenPersonDetails(int id)
+    {
+        nav.NavigateTo($"PersonDetails/{id}");
     }
 }

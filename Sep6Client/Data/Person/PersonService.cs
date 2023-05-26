@@ -10,15 +10,17 @@ using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
 using Microsoft.Extensions.Options;
+using Sep6Client.Data.Movies;
 
 namespace Sep6Client.Data.Person
 {
     public class PersonService : IPersonService
     {
         private readonly HttpClient client;
-        private string baseUri;
-        private string apiKey;
+        private readonly string baseUri;
+        private readonly string apiKey;
         private readonly JsonSerializerOptions options;
+        private MoviesService moviesService;
 
         public PersonService(IOptions<TmdbSettings> tmdbSettings)
         {
@@ -32,6 +34,7 @@ namespace Sep6Client.Data.Person
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNameCaseInsensitive = true
             };
+            moviesService = new MoviesService(tmdbSettings);
         }
 
         private async Task<PersonListResult> GetPersonsAsync(int pageNr)
@@ -93,44 +96,43 @@ namespace Sep6Client.Data.Person
 
             return httpResponse?.NrOfPages ?? 0;
         }
-        private async Task<PersonListResult> GetCrewAsync(string movieTitle)
-        {
-            var resultPageCount = await GetResultPagesAsync(movieTitle);
-            var personList = new PersonListResult
-            {
-                Persons = new List<PersonResult>(),
-                NrOfPages = 0
-            };
-
-            for (var i = 0; i < resultPageCount; i++)
-            {
-                var response = await client.GetAsync($"{baseUri}search/person?query={movieTitle}");
-                
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
-                }
-                
-                var stream = await response.Content.ReadAsStreamAsync();
-                var httpResponse = JsonSerializer.Deserialize<PersonListResult>(stream, options);
-                
-
-                try
-                {
-
-                    foreach (var person in httpResponse.Persons)
-                    {
-                        personList.Persons.Add(person);
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw new HttpRequestException($"No crew found for {movieTitle}", e);
-                }
-            }
-
-            return personList;
-        }
+        // private async Task<PersonListResult> GetCrewAsync(string movieTitle)
+        // {
+        //     var resultPageCount = await GetResultPagesAsync(movieTitle);
+        //     var personList = new PersonListResult
+        //     {
+        //         Persons = new List<PersonResult>(),
+        //         NrOfPages = 0
+        //     };
+        //
+        //     for (var i = 0; i < resultPageCount; i++)
+        //     {
+        //         var response = await client.GetAsync($"{baseUri}search/person?query={movieTitle}");
+        //         
+        //         if (!response.IsSuccessStatusCode)
+        //         {
+        //             throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
+        //         }
+        //         
+        //         var stream = await response.Content.ReadAsStreamAsync();
+        //         var httpResponse = JsonSerializer.Deserialize<PersonListResult>(stream, options);
+        //         
+        //
+        //         try
+        //         {
+        //             foreach (var person in httpResponse.Persons)
+        //             {
+        //                 personList.Persons.Add(person);
+        //             }
+        //         }
+        //         catch (Exception e)
+        //         {
+        //             throw new HttpRequestException($"No crew found for {movieTitle}", e);
+        //         }
+        //     }
+        //
+        //     return personList;
+        // }
 
         private async Task<PersonResult> GetPersonAsync(int id)
         {
@@ -155,6 +157,7 @@ namespace Sep6Client.Data.Person
             try
             {
                 person = PersonMapper.ToPerson(response);
+                person.KnownFor = await moviesService.GetMoviesByPersonIdAsync(personId);
             }
             catch (Exception e)
             {
