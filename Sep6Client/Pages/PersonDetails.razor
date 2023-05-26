@@ -29,6 +29,7 @@ else
     @if (person.KnownFor.ActorCredits is {Count: > 0})
     {
         <br/>
+        <p><b>Average rating of movies: </b>@person.KnownFor.ActorMovieRatingAverage/10</p>
         <label><b>Movies acted in:</b></label>
         <ol>
             @foreach(var item in person.KnownFor.ActorCredits)
@@ -41,6 +42,7 @@ else
     @if (person.KnownFor.CrewCredits is {Count: > 0})
     {
         <br/>
+        <p><b>Average rating of movies: </b>@person.KnownFor.CrewMovieRatingAverage/10</p>
         <label><b>Movies worked on:</b></label>
         <ol>
             @foreach(var item in person.KnownFor.CrewCredits)

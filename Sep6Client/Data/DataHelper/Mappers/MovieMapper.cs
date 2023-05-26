@@ -17,7 +17,7 @@ namespace Sep6Client.Data.DataHelper.Mappers
                     Title = result.Title,
                     Description = result.Description,
                     Poster = result.Poster,
-                    Rating = result.Rating,
+                    Rating = Math.Round(result.Rating, 2),
                     Votes = result.Votes,
                     ReleaseDate = result.ReleaseDate,
                     Language = result.Language,
