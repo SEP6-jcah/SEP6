@@ -149,5 +149,44 @@ namespace Sep6Client.Data.Movies
 
             return movie;
         }
+
+        private async Task<CreditListResult> GetMoviesByPersonAsync(int id)
+        {
+            var response = await client.GetAsync($"{baseUri}person/{id}/movie_credits");
+            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
+            }
+
+            var stream = await response.Content.ReadAsStreamAsync();
+
+            var httpResponse = JsonSerializer.Deserialize<CreditListResult>(stream, options);
+
+            return httpResponse ?? throw new HttpRequestException("Unmarshalling movies http response failed.");
+
+        }
+
+        public async Task<CreditList> GetMoviesByPersonIdAsync(int id)
+        {
+            var response = await GetMoviesByPersonAsync(id);
+            var credits = new CreditList()
+            {
+                ActorCredits = new List<ActorCredits>(),
+                CrewCredits = new List<CrewCredits>()
+            };
+
+            try
+            {
+                credits = CreditMapper.ToCreditList(response);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Failed to map credits: {e.Message}\n{e.StackTrace}");
+                throw new FormatException($"Failed to map credits: {e.Message}\n{e.StackTrace}", e);
+            }
+
+            return credits;
+        }
     }
 }

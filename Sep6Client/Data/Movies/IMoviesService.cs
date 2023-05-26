@@ -10,5 +10,6 @@ namespace Sep6Client.Data.Movies
         Task<MovieList> GetBrowsingMoviesAsync(Dictionary<SearchFilterOptions, string> filters);
         Task<MovieList> GetFilteredMoviesAsync(Dictionary<SearchFilterOptions, string> searchCriteria);
         Task<Movie> GetMovieByIdAsync(int id);
+        Task<CreditList> GetMoviesByPersonIdAsync(int movieId);
     }
 }
