@@ -21,7 +21,7 @@ namespace Sep6Client.Data.Movies
         private string baseUri;
         private string apiKey;
         private readonly JsonSerializerOptions options;
-        private readonly QueryHelper queryHelper;
+        private readonly MovieQueryHelper movieQueryHelper;
         private CastAndCrewService castAndCrewService;
         
         public MoviesService(IOptions<TmdbSettings> tmdbSettings)
@@ -36,7 +36,7 @@ namespace Sep6Client.Data.Movies
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNameCaseInsensitive = true
             };
-            queryHelper = new QueryHelper();
+            movieQueryHelper = new MovieQueryHelper();
             castAndCrewService = new (tmdbSettings);
         }
 
@@ -59,7 +59,7 @@ namespace Sep6Client.Data.Movies
 
         public async Task<MovieList> GetBrowsingMoviesAsync(Dictionary<SearchFilterOptions, string> filters)
         {
-            var query = queryHelper.GetBrowseQuery(filters);
+            var query = movieQueryHelper.GetBrowseQuery(filters);
 
             var response = await GetMoviesAsync(query);
             var movies = new MovieList
@@ -84,7 +84,7 @@ namespace Sep6Client.Data.Movies
 
         public async Task<MovieList> GetFilteredMoviesAsync(Dictionary<SearchFilterOptions, string> searchCriteria)
         {
-            var query = queryHelper.GetSearchQuery(searchCriteria);
+            var query = movieQueryHelper.GetSearchQuery(searchCriteria);
 
             var response = await GetMoviesAsync(query);
             var movies = new MovieList
@@ -188,6 +188,106 @@ namespace Sep6Client.Data.Movies
             }
 
             return credits;
+        }
+
+        public async Task<MovieList> GetPopularMoviesAsync()
+        {
+            var query = movieQueryHelper.GetPopularQuery();
+            var response = await GetMoviesAsync(query);
+            
+            var movies = new MovieList
+            {
+                Movies = new List<Movie>(),
+                NrOfPages = response.NrOfPages,
+                NrOfResults = response.NrOfMovies
+            };
+
+            try
+            {
+                movies.Movies = response.Movies.Select(MovieMapper.ToMovie).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+                throw new FormatException($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+            }
+
+            return movies;
+        }
+        
+        public async Task<MovieList> GetCurrentMoviesAsync()
+        {
+            var query = movieQueryHelper.GetCurrentMovieQuery();
+            var response = await GetMoviesAsync(query);
+            
+            var movies = new MovieList
+            {
+                Movies = new List<Movie>(),
+                NrOfPages = response.NrOfPages,
+                NrOfResults = response.NrOfMovies
+            };
+
+            try
+            {
+                movies.Movies = response.Movies.Select(MovieMapper.ToMovie).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+                throw new FormatException($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+            }
+
+            return movies;
+        }
+        
+        public async Task<MovieList> GetHighestRatedMoviesAsync()
+        {
+            var query = movieQueryHelper.GetTopRatedQuery();
+            var response = await GetMoviesAsync(query);
+            
+            var movies = new MovieList
+            {
+                Movies = new List<Movie>(),
+                NrOfPages = response.NrOfPages,
+                NrOfResults = response.NrOfMovies
+            };
+
+            try
+            {
+                movies.Movies = response.Movies.Select(MovieMapper.ToMovie).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+                throw new FormatException($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+            }
+
+            return movies;
+        }
+        
+        public async Task<MovieList> GetUpcomingMoviesAsync()
+        {
+            var query = movieQueryHelper.GetUpcomingQuery();
+            var response = await GetMoviesAsync(query);
+            
+            var movies = new MovieList
+            {
+                Movies = new List<Movie>(),
+                NrOfPages = response.NrOfPages,
+                NrOfResults = response.NrOfMovies
+            };
+
+            try
+            {
+                movies.Movies = response.Movies.Select(MovieMapper.ToMovie).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+                throw new FormatException($"Failed to map popular movies: {e.Message}\n{e.StackTrace}");
+            }
+
+            return movies;
         }
     }
 }

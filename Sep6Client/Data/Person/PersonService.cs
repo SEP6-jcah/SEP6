@@ -21,7 +21,7 @@ namespace Sep6Client.Data.Person
         private readonly string baseUri;
         private readonly string apiKey;
         private readonly JsonSerializerOptions options;
-        private MoviesService moviesService;
+        private IMoviesService moviesService;
         private PersonQueryHelper queryHelper;
 
         public PersonService(IOptions<TmdbSettings> tmdbSettings)

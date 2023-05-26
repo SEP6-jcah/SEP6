@@ -72,7 +72,7 @@
         {
             {SearchFilterOptions.PageNr, pageCounter.ToString()},
             {SearchFilterOptions.Text, searchText},
-            {SearchFilterOptions.SortBy, QueryHelper.GetSortByOptions().First()}
+            {SearchFilterOptions.SortBy, MovieQueryHelper.GetSortByOptions().First()}
         };
 
         await base.OnInitializedAsync();

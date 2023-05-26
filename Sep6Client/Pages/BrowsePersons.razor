@@ -57,7 +57,7 @@ else
         {
             {SearchFilterOptions.PageNr, pageCounter.ToString()},
             {SearchFilterOptions.Text, string.Empty},
-            {SearchFilterOptions.SortBy, QueryHelper.GetSortByOptions().First()}
+            {SearchFilterOptions.SortBy, MovieQueryHelper.GetSortByOptions().First()}
         };
         await GetPersonsAsync();
     }
