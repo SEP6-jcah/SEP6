@@ -39,7 +39,7 @@ else
             {
                 var id = person.PersonId;
                 <tr>
-                    <td><a @onclick="() => OpenPersonDetails(id)">@person.Name</a></td>
+                    <td><a href=# @onclick="() => OpenPersonDetails(id)">@person.Name</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@person.Character</td>
                 </tr>
             }
@@ -62,7 +62,7 @@ else
             {
                 var id = person.PersonId;
                 <tr>
-                    <td><a @onclick="() => OpenPersonDetails(id)">@person.Name</a></td>
+                    <td><a href=# @onclick="() => OpenPersonDetails(id)">@person.Name</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@person.Job</td>
                 </tr>
             }

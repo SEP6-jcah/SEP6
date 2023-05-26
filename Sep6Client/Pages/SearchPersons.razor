@@ -1,0 +1,120 @@
+@page "/SearchPersons"
+@using Sep6Client.Model
+@using Sep6Client.Data.Person
+@using Sep6Client.Data.DataHelper.Search
+@inject IPersonService personService
+@inject NavigationManager nav
+
+
+<PageTitle>Search People</PageTitle>
+<h1>Search for people</h1>
+
+<p><em>Enter a name to search for and press the 'Search' button.</em></p>
+
+    <div>
+        <InputText @bind-Value="searchText"></InputText>
+        <button @onclick="SearchPersonsAsync">Search</button>
+        <br/>
+    </div>
+
+@if (persons != null)
+{
+    @if (persons.Persons.Count > 0)
+    {
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Profession</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var person in persons.Persons)
+                {
+                    var id = person.Id;
+                    <tr>
+                        <td><a href=# @onclick="() => OpenPersonDetails(id)">@person.Name</a>&nbsp;&nbsp;&nbsp;</td>
+                        <td>@person.Job</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    
+        <div>
+            @if (pageCounter > 1)
+            {
+                <button @onclick="OnLoadPreviousPage">@leftArrow-- Previous</button>
+            }
+            <button @onclick="OnLoadNextPage">Next --></button>
+        </div>
+    }
+    @if (persons.Persons.Count <= 0 && !string.IsNullOrWhiteSpace(searchText))
+    {
+        <br/>
+        <p>Your search for <em>'@searchText'</em> did not return any results.</p>
+    }
+}
+<p style="color: red">@errorMessage</p>
+
+@code {
+    private string searchText = "";
+    private PersonList? persons;
+    private int pageCounter = 1;
+    private string errorMessage = "";
+    private char leftArrow = '<';
+    private Dictionary<SearchFilterOptions, string>? searchCriteria;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        searchCriteria = new Dictionary<SearchFilterOptions, string>
+        {
+            {SearchFilterOptions.PageNr, pageCounter.ToString()},
+            {SearchFilterOptions.Text, searchText},
+            {SearchFilterOptions.SortBy, QueryHelper.GetSortByOptions().First()}
+        };
+
+        await base.OnInitializedAsync();
+    }
+    
+    private async Task SearchPersonsAsync()
+    {
+        
+        UpdateSearchCriteria();
+        
+        try
+        {
+            persons = await personService.GetFilteredPersonsAsync(searchCriteria);
+        }
+        catch(Exception e)
+        {
+            errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private void UpdateSearchCriteria()
+    {
+        searchCriteria[SearchFilterOptions.PageNr] = pageCounter.ToString();
+        searchCriteria[SearchFilterOptions.Text] = searchText;
+    }
+
+    private async Task OnLoadNextPage()
+    {
+        pageCounter++;
+        await SearchPersonsAsync();
+    }
+
+    private async Task OnLoadPreviousPage()
+    {
+        pageCounter--;
+        await SearchPersonsAsync();
+    }
+
+    private void OpenPersonDetails(int id)
+    {
+        // TODO: Add page number to cookies to navigate back to same page - Aldís 26.05.23
+        nav.NavigateTo($"/PersonDetails/{id}");
+    }
+}

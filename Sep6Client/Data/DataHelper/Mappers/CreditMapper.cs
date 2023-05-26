@@ -34,10 +34,24 @@ namespace Sep6Client.Data.DataHelper.Mappers
                         Character = actorCredits.Character
                     })
                     .ToList();
+                var actorRatingAvg = 0.0;
+                var crewRatingAvg = 0.0;
+                if (actors is {Count: > 0})
+                {
+                    var actorRatings = actors.Select(movie => movie.MovieRating).ToList().Average();
+                    actorRatingAvg = Math.Round(actorRatings, 2);
+                }
+                if (crew is {Count: > 0})
+                {
+                    var crewRatings = crew.Select(movie => movie.MovieRating).ToList().Average();
+                    crewRatingAvg = Math.Round(crewRatings, 2);
+                }
                 return new CreditList
                 {
                     ActorCredits = actors,
-                    CrewCredits = crew
+                    CrewCredits = crew,
+                    ActorMovieRatingAverage = actorRatingAvg,
+                    CrewMovieRatingAverage = crewRatingAvg
                 };
             }
             catch (Exception e)

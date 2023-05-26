@@ -32,7 +32,7 @@ namespace Sep6Client.Data.DataHelper.Wrappers
         
         [Required]
         [JsonPropertyName("vote_average")]
-        public float Rating { get; set; }
+        public double Rating { get; set; }
         
         [JsonPropertyName("vote_count")]
         public int Votes { get; set; }

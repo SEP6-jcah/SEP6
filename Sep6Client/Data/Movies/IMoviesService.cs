@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sep6Client.Data.DataHelper;
+using Sep6Client.Data.DataHelper.Search;
 using Sep6Client.Model;
 
 namespace Sep6Client.Data.Movies
