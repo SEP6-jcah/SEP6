@@ -11,6 +11,7 @@ using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
 using Microsoft.Extensions.Options;
+using Sep6Client.Data.DataHelper.Search;
 
 namespace Sep6Client.Data.Movies
 {

@@ -31,26 +31,26 @@ else
         <br/>
         <p><b>Average rating of movies: </b>@person.KnownFor.ActorMovieRatingAverage/10</p>
         <label><b>Movies acted in:</b></label>
-        <ol>
+        <ul>
             @foreach(var item in person.KnownFor.ActorCredits)
             {
                 var movieId = item.MovieId;
-                <li><a @onclick="() => OpenMovieDetails(movieId)"><em>@item.MovieTitle</em>@GetCharacterOrNot(item.Character)</a></li>
+                <li><a href=# @onclick="() => OpenMovieDetails(movieId)">@item.MovieTitle</a>@GetCharacterOrNot(item.Character)</li>
             }
-        </ol>
+        </ul>
     }
     @if (person.KnownFor.CrewCredits is {Count: > 0})
     {
         <br/>
         <p><b>Average rating of movies: </b>@person.KnownFor.CrewMovieRatingAverage/10</p>
         <label><b>Movies worked on:</b></label>
-        <ol>
+        <ul>
             @foreach(var item in person.KnownFor.CrewCredits)
             {
                 var movieId = item.MovieId;
-                <li><a @onclick="() => OpenMovieDetails(movieId)"><em>@item.MovieTitle</em> (@GetCrewJobOrNot(item.Job)@item.Department)</a></li>
+                <li><a href=# @onclick="() => OpenMovieDetails(movieId)">@item.MovieTitle</a> (@GetCrewJobOrNot(item.Job)@item.Department)</li>
             }
-        </ol>
+        </ul>
     }
 }
 

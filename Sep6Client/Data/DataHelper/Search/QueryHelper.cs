@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sep6Client.Data.DataHelper
+namespace Sep6Client.Data.DataHelper.Search
 {
     public class QueryHelper
     {
-        private string baseBrowseQuery = "discover/movie?include_adult=false&include_video=false";
-        private string baseSearchQuery = "search/movie?include_adult=false&include_video=false";
-        private string page = "&page=";
-        private string text = "&query=";
-        private string sort = "&sort_by=";
+        private const string BaseBrowseQuery = "discover/movie?include_adult=false&include_video=false";
+        private const string BaseSearchQuery = "search/movie?include_adult=false&include_video=false";
+        private const string Page = "&page=";
+        private const string Text = "&query=";
+        private const string Sort = "&sort_by=";
         private readonly string[] sortOptions = {"popularity", "vote_average"};
         private readonly string[] sortOrderOptions = { ".desc", ".asc"};
 
@@ -21,12 +21,12 @@ namespace Sep6Client.Data.DataHelper
         
         public string GetSearchQuery(Dictionary<SearchFilterOptions, string> criteria)
         {
-            return baseSearchQuery + GetSearchQueryParameters(criteria);
+            return BaseSearchQuery + GetSearchQueryParameters(criteria);
         }
 
         public string GetBrowseQuery(Dictionary<SearchFilterOptions, string> criteria)
         {
-            return baseBrowseQuery + GetBrowseQueryParameters(criteria);
+            return BaseBrowseQuery + GetBrowseQueryParameters(criteria);
         }
 
         private string GetSearchQueryParameters(Dictionary<SearchFilterOptions, string> criteria)
@@ -47,12 +47,12 @@ namespace Sep6Client.Data.DataHelper
             
             if (!string.IsNullOrEmpty(searchText))
             {
-                result += text + searchText.Replace(' ', '+');
+                result += Text + searchText.Replace(' ', '+');
             }
 
             if (!string.IsNullOrEmpty(pageNr))
             {
-                result += page + pageNr;
+                result += Page + pageNr;
             }
             
             return result;
@@ -76,7 +76,7 @@ namespace Sep6Client.Data.DataHelper
 
             if (!string.IsNullOrEmpty(pageNr))
             {
-                result += page + pageNr;
+                result += Page + pageNr;
             }
             if (!string.IsNullOrEmpty(sortBy))
             {
@@ -93,11 +93,11 @@ namespace Sep6Client.Data.DataHelper
                         opt = sortOptions[0];
                         break;
                 }
-                result += sort + opt+ sortOrderOptions[0];
+                result += Sort + opt+ sortOrderOptions[0];
             }
             else
             {
-                result += sort + sortOptions.First() + sortOrderOptions.First();
+                result += Sort + sortOptions.First() + sortOrderOptions.First();
             }
 
             return result;

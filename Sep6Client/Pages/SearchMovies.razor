@@ -2,6 +2,7 @@
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
 @using Sep6Client.Data.DataHelper
+@using Sep6Client.Data.DataHelper.Search
 @inject IMoviesService moviesService
 @inject NavigationManager nav
 
@@ -31,7 +32,7 @@
             {
                 var id = movie.Id;
                 <tr>
-                    <td><a @onclick="() => OpenMovieDetails(id)">@movie.Title</a></td>
+                    <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@movie.Rating/10</td>
                 </tr>
             }
