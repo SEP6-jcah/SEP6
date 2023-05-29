@@ -8,7 +8,7 @@ using MovieService.Model;
 using MovieService.Repositories.MovieRepo;
 using Xunit;
 
-namespace Tests
+namespace MovieService.Tests
 {
     public class MoviesControllerTests
     {

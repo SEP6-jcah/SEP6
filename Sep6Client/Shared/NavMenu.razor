@@ -1,8 +1,4 @@
-﻿@inject NavigationManager nav
-@inject FirebaseAuthClient authProvider
-@inject IToastService toast
-
-<div class="top-row ps-3 navbar navbar-dark">
+﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Sep6Client</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -17,25 +13,10 @@
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
-        </div>     
+        </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Movies">
+            <NavLink class="nav-link" href="movies">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> All Movies
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="SearchMovies">
-                <span class="oi oi-magnifying-glass" aria-hidden="true"></span> Search Movies
-                </NavLink>
-            </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="BrowsePersons">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> People
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="SearchPersons">
-                <span class="oi oi-magnifying-glass" aria-hidden="true"></span> Search People
             </NavLink>
         </div>
     </nav>
