@@ -38,9 +38,17 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Blazored.Toast": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "FirebaseAuthentication.net": {
               "target": "Package",
               "version": "[4.0.2, )"
+            },
+            "FirebaseDatabase.net": {
+              "target": "Package",
+              "version": "[4.2.0, )"
             },
             "RestSharp": {
               "target": "Package",

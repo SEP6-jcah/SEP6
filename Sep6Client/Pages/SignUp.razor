@@ -2,6 +2,7 @@
 @inject NavigationManager nav
 @inject FirebaseAuthClient authProvider
 @inject IToastService toast
+@inject IUserService userService
 
 <h3>Sign Up</h3>
 
@@ -31,8 +32,8 @@
     {
         try
         {
-            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password,username);
-            SignUpSuccessful(auth.User);
+            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password, username);
+            SignUpSuccessful();
         }
         catch (Exception e)
         {
@@ -41,9 +42,16 @@
         }
     }
 
-    private void SignUpSuccessful(User user)
+    private async void SignUpSuccessful()
     {
-        toast.ShowSuccess("Registration Successful!");        
+        var registeredUser = new RegisteredUser
+        {
+            Email = email,
+            Username = username
+        };
+        await userService.CreateUserAsync(registeredUser);
+
+        toast.ShowSuccess("Registration Successful!");
         nav.NavigateTo("/");
     }
 }
