@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Sep6Client.Model{
     public class RegisteredUser
     {
