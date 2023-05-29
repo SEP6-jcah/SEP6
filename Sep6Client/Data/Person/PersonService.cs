@@ -10,15 +10,19 @@ using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
 using Microsoft.Extensions.Options;
+using Sep6Client.Data.DataHelper.Search;
+using Sep6Client.Data.Movies;
 
 namespace Sep6Client.Data.Person
 {
     public class PersonService : IPersonService
     {
         private readonly HttpClient client;
-        private string baseUri;
-        private string apiKey;
+        private readonly string baseUri;
+        private readonly string apiKey;
         private readonly JsonSerializerOptions options;
+        private IMoviesService moviesService;
+        private PersonQueryHelper queryHelper;
 
         public PersonService(IOptions<TmdbSettings> tmdbSettings)
         {
@@ -32,11 +36,14 @@ namespace Sep6Client.Data.Person
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNameCaseInsensitive = true
             };
+            moviesService = new MoviesService(tmdbSettings);
+            queryHelper = new PersonQueryHelper();
         }
 
-        private async Task<PersonListResult> GetPersonsAsync(int pageNr)
+        private async Task<PersonListResult> GetPersonsAsync(string query)
         {
-            var response = await client.GetAsync($"{baseUri}person/popular?page={pageNr}");
+            Console.WriteLine($"\n\n\nSending query: {query}");
+            var response = await client.GetAsync(baseUri + query);
             
             if (!response.IsSuccessStatusCode)
             {
@@ -50,9 +57,11 @@ namespace Sep6Client.Data.Person
             return httpResponse ?? throw new HttpRequestException("Unmarshalling persons http response failed.");
         }
 
-        public async Task<PersonList> GetBrowsePersonsAsync(int pageNr)
+        public async Task<PersonList> GetBrowsePersonsAsync(Dictionary<SearchFilterOptions, string> criteria)
         {
-            var response = await GetPersonsAsync(pageNr);
+            var query = queryHelper.GetBrowseQuery(criteria);
+            var response = await GetPersonsAsync(query);
+            
             var persons = new PersonList
             {
                 Persons = new List<Model.Person>(),
@@ -74,62 +83,6 @@ namespace Sep6Client.Data.Person
             }
 
             return persons;
-        }
-
-        private async Task<int> GetResultPagesAsync(string movieTitle)
-        {
-            if (string.IsNullOrWhiteSpace(movieTitle))
-                return 0;
-            var response = await client.GetAsync($"{baseUri}search/person?query={movieTitle}");
-            
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
-            }
-            
-            var stream = await response.Content.ReadAsStreamAsync();
-
-            var httpResponse = JsonSerializer.Deserialize<PersonListResult>(stream);
-
-            return httpResponse?.NrOfPages ?? 0;
-        }
-        private async Task<PersonListResult> GetCrewAsync(string movieTitle)
-        {
-            var resultPageCount = await GetResultPagesAsync(movieTitle);
-            var personList = new PersonListResult
-            {
-                Persons = new List<PersonResult>(),
-                NrOfPages = 0
-            };
-
-            for (var i = 0; i < resultPageCount; i++)
-            {
-                var response = await client.GetAsync($"{baseUri}search/person?query={movieTitle}");
-                
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");
-                }
-                
-                var stream = await response.Content.ReadAsStreamAsync();
-                var httpResponse = JsonSerializer.Deserialize<PersonListResult>(stream, options);
-                
-
-                try
-                {
-
-                    foreach (var person in httpResponse.Persons)
-                    {
-                        personList.Persons.Add(person);
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw new HttpRequestException($"No crew found for {movieTitle}", e);
-                }
-            }
-
-            return personList;
         }
 
         private async Task<PersonResult> GetPersonAsync(int id)
@@ -155,6 +108,7 @@ namespace Sep6Client.Data.Person
             try
             {
                 person = PersonMapper.ToPerson(response);
+                person.KnownFor = await moviesService.GetMoviesByPersonIdAsync(personId);
             }
             catch (Exception e)
             {
@@ -163,6 +117,35 @@ namespace Sep6Client.Data.Person
             }
 
             return person;
+        }
+
+        public async Task<PersonList> GetFilteredPersonsAsync(Dictionary<SearchFilterOptions, string> criteria)
+        {
+            var query = queryHelper.GetSearchQuery(criteria);
+
+            var response = await GetPersonsAsync(query);
+            
+            var persons = new PersonList
+            {
+                Persons = new List<Model.Person>(),
+                NrOfPages = 0,
+                NrOfResults = 0
+            };
+
+            try
+            {
+                foreach (var person in response.Persons)
+                {
+                    persons.Persons.Add(PersonMapper.ToPerson(person));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"{e.Message}\n{e.StackTrace}");
+                throw new FormatException($"Failed to map persons: {e.Message}\n{e.StackTrace}");
+            }
+
+            return persons;
         }
     }
 }

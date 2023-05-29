@@ -2,6 +2,7 @@
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
 @using Sep6Client.Data.DataHelper
+@using Sep6Client.Data.DataHelper.Search
 @inject IMoviesService moviesService
 @inject NavigationManager nav
 
@@ -39,7 +40,7 @@ else
             {
                 var id = movie.Id;
                 <tr>
-                    <td><a @onclick="() => OpenMovieDetails(id)">@movie.Title</a></td>
+                    <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@movie.Rating/10</td>
                     <td>@movie.ReleaseDate</td>
                 </tr>
@@ -64,7 +65,7 @@ else
     private string errorMessage = "";
     private char leftArrow = '<';
     private Dictionary<SearchFilterOptions, string> searchCriteria;
-    private readonly string[] sortOptions = QueryHelper.GetSortByOptions();
+    private readonly string[] sortOptions = MovieQueryHelper.GetSortByOptions();
     private string selectedSortOption;
     // TODO: Add sort order - Aldís 19.05.23
     

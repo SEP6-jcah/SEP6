@@ -1,4 +1,4 @@
-namespace Sep6Client.Data.DataHelper
+namespace Sep6Client.Data.DataHelper.Search
 {
     public enum SearchFilterOptions
     {

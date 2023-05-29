@@ -38,6 +38,7 @@
           }
         }
       },
+
       "FirebaseDatabase.net/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -73,6 +74,7 @@
           }
         }
       },
+
       "Microsoft.AspNetCore.Authorization/7.0.1": {
         "type": "package",
         "dependencies": {
@@ -263,6 +265,7 @@
           }
         }
       },
+
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -281,6 +284,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+
       "Newtonsoft.Json/13.0.2": {
         "type": "package",
         "compile": {
@@ -437,6 +441,22 @@
           "ref/netstandard1.3/System.Text.Encoding.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "System.IO.Pipelines/7.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/System.IO.Pipelines.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/System.IO.Pipelines.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
         }
       },
       "System.Text.Encodings.Web/7.0.0": {

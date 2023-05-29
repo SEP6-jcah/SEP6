@@ -12,22 +12,25 @@ namespace Sep6Client.Data.DataHelper.Wrappers
         
         [Required]
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
+        
+        [JsonPropertyName("also_known_as")]
+        public string[] Aka { get; set; }
+        
+        [JsonPropertyName("original_name")]
+        public string? OriginalName { get; set; }
         
         [Required]
         [JsonPropertyName("gender")]
         public int Gender { get; set; }
         
         [JsonPropertyName("birthday")]
-        public string Birthday { get; set; }
+        public string? Birthday { get; set; }
         
         [JsonPropertyName("biography")]
-        public string Biography { get; set; }
+        public string? Biography { get; set; }
         
         [JsonPropertyName("known_for_department")]
-        public string Department { get; set; }
-        
-        [JsonPropertyName("known_for")]
-        public Movie[] KnownFor { get; set; }
+        public string? Job { get; set; }
     }
 }

@@ -12,17 +12,15 @@
   <component name="ChangeListManager">
     <list default="true" id="1ccb7000-d5a2-4c3c-95cd-5f6d1f910c35" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SEP6.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/CrewMemberMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/CrewMemberMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/MovieMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Mappers/MovieMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/CrewMemberResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/CrewMemberResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Wrappers/MovieResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Search/QueryHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/DataHelper/Search/MovieQueryHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/IMoviesService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/CrewMember.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/CrewMember.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Model/Movie.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Data/Person/PersonService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Data/Person/PersonService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sep6Client/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/BrowsePersons.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/BrowsePersons.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/SearchMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/SearchMovies.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/SearchPersons.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/SearchPersons.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sep6Client/Pages/Welcome.razor" beforeDir="false" afterPath="$PROJECT_DIR$/Sep6Client/Pages/Welcome.razor" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,16 +39,20 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Sep6Client/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MovieService/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Data/Crew/ICastAndCrewService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Data/Crew/CastAndCrewService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Sep6Client/Shared/NavMenu.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MovieService/Tests/Usings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/MovieDetails.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/Error.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MovieService/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Data/Movies/MoviesService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Persistence/MovieDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Controllers/MoviesController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Model/Movie.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/MovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MovieService/Tests/Usings.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MovieService/Repositories/MovieRepo/IMovieRepo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/BrowseMovies.razor" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Sep6Client/Pages/Error.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PdqswVXEp7CBAsoVXu3YyJoweT" />
   <component name="ProjectLevelVcsManager">
@@ -220,6 +222,7 @@
       <workItem from="1684765683271" duration="7372000" />
       <workItem from="1684912703839" duration="29465000" />
       <workItem from="1685029336853" duration="5306000" />
+      <workItem from="1685038025729" duration="6035000" />
     </task>
     <servers />
   </component>
