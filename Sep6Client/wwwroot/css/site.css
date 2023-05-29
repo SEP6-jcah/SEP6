@@ -50,10 +50,6 @@ a, .btn-link {
     z-index: 1000;
 }
 
-.oi-magnifying-glass:before {
-    content:'\e08f';
-}
-
     #blazor-error-ui .dismiss {
         cursor: pointer;
         position: absolute;
