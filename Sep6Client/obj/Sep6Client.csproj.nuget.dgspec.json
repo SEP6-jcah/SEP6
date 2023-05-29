@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\sep6client\\Sep6Client.csproj": {}
+    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\Sep6Client\\Sep6Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\sep6client\\Sep6Client.csproj": {
+    "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\Sep6Client\\Sep6Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\sep6client\\Sep6Client.csproj",
+        "projectUniqueName": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\Sep6Client\\Sep6Client.csproj",
         "projectName": "Sep6Client",
-        "projectPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\sep6client\\Sep6Client.csproj",
+        "projectPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\Sep6Client\\Sep6Client.csproj",
         "packagesPath": "C:\\Users\\Bruger\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\sep6client\\obj\\",
+        "outputPath": "C:\\Users\\Bruger\\OneDrive\\GitHub\\SEP6\\Sep6Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Bruger\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +45,10 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "Firebase.Auth": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "FirebaseAuthentication.net": {
               "target": "Package",
               "version": "[4.0.2, )"
@@ -51,6 +56,14 @@
             "FirebaseDatabase.net": {
               "target": "Package",
               "version": "[4.2.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.6.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
             },
             "RestSharp": {
               "target": "Package",
@@ -76,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
