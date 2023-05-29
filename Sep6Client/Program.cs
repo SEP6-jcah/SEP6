@@ -5,6 +5,7 @@ using Sep6Client.Data.Crew;
 using Sep6Client.Data.Movies;
 using Sep6Client.Data.Person;
 using Sep6Client.Data.DataHelper;
+using Sep6Client.Data.Social;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Blazored.Toast;
@@ -12,8 +13,8 @@ using Blazored.Toast;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var firebaseApiKey = builder.Configuration.GetSection("Firebase:ApiKey").Value;
-var firebaseAuthDomain = builder.Configuration.GetSection("Firebase:Domain").Value;
+var firebaseApiKey = builder.Configuration.GetSection("Firebase:Auth:ApiKey").Value;
+var firebaseAuthDomain = builder.Configuration.GetSection("Firebase:Auth:Domain").Value;
 
 var firebaseConfig = new FirebaseAuthConfig
 {
@@ -29,6 +30,8 @@ var firebaseConfig = new FirebaseAuthConfig
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.Configure<TmdbSettings>(builder.Configuration.GetSection("TMDB"));
+builder.Services.Configure<RtdbSettings>(builder.Configuration.GetSection("Firebase:Database"));
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICastAndCrewService, CastAndCrewService>();

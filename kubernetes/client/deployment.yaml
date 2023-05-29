@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: europe-docker.pkg.dev/sep6-jcah/sep6-jcah/client:latest
+          image: europe-north1-docker.pkg.dev/sep6-jcah/sep6-jcah/client:latest
           resources:
             limits:
               cpu: "250m"

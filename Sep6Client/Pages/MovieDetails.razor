@@ -4,7 +4,11 @@
 @using Sep6Client.Data.Person
 @inject IMoviesService moviesService
 @inject IPersonService personService
+@inject IUserService userService
 @inject NavigationManager nav
+@inject FirebaseAuthClient authProvider
+@inject IToastService toast
+
 
 <PageTitle>Movie Details</PageTitle>
 
@@ -14,8 +18,12 @@
 }
 else
 {
-    <h1>@movie.Title</h1>
+    <h1>@movie.Title </h1>
     @*<img src="@movie.Poster" alt="Official movie poster."/>*@
+    @if (authProvider.User is not null)
+    {
+    <button @onclick="AddToFavorites">Add to Favorites</button>
+    }
     <p><b>ID:</b> @Id</p>
     @if (movie.Directors is {Count: > 0})
     {
@@ -99,6 +107,30 @@ else
         // Removing last two characters if there are any directors
         return string.IsNullOrWhiteSpace(temp) ? temp : temp[..^2];
     }
+
+    private async Task AddToFavorites()
+    {
+        try
+        {
+            var loggedInUserEmail = authProvider.User.Info.Email;
+            var user = await userService.GetUserByEmailAsync(loggedInUserEmail);
+
+            if (user != null && !user.FavouriteMovies.Contains(Id.ToString()))
+            {
+                user.FavouriteMovies.Add(Id.ToString());
+                await userService.UpdateUserAsync(user);
+                toast.ShowSuccess("Movie added to favorites!");
+            }
+            else
+            {
+                toast.ShowInfo("Movie is already in favorites.");
+            }
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("An error occurred while adding the movie to favorites.");
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
 
     private void OpenPersonDetails(int id)
     {

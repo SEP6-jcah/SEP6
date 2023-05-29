@@ -16,7 +16,12 @@
                 <span>
                     Welcome, @authProvider.User.Info.DisplayName!
                 </span>
-                <NavLink class="nav-link" @onclick="LogoutUser">
+                <span>
+                    <NavLink class="nav-link" href="/Account">
+                        <span class="oi oi-person" aria-hidden="true"></span> Account
+                    </NavLink>
+                </span>   
+                <NavLink class="nav-link" href="/" @onclick="LogoutUser">
                     <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
                 </NavLink>
             }else
@@ -43,6 +48,10 @@
     private void LogoutUser()
     {
         authProvider.SignOut();
-        toast.ShowSuccess("Logout Successful!");
+        if(authProvider.User == null){
+            toast.ShowSuccess("Logout Successful!");
+        }else{
+            toast.ShowError("Logout Unsuccessful, please try again!");
+        }
     }
 }
