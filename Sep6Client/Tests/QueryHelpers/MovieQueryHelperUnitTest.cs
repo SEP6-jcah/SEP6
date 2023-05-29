@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Sep6Client.Data.DataHelper.Search;
 
-namespace Sep6Client.UnitTest.QueryHelpers
+namespace Sep6Client.Tests.QueryHelpers
 {
     [TestFixture]
     public class MovieQueryHelperUnitTest
