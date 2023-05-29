@@ -57,6 +57,14 @@
               "target": "Package",
               "version": "[4.2.0, )"
             },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.6.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
             "RestSharp": {
               "target": "Package",
               "version": "[110.2.0, )"
