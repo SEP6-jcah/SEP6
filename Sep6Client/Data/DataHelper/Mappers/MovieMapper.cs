@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
 using Sep6Client.Data.DataHelper.Wrappers;
 using Sep6Client.Model;
 
-namespace Sep6Client.Data.DataHelper
+namespace Sep6Client.Data.DataHelper.Mappers
 {
-    public class MovieMapper
+    public static class MovieMapper
     {
-        public static Movie ToTmdbMovie(MovieResult result)
+        public static Movie ToMovie(MovieResult result)
         {
             try
             {
@@ -16,11 +17,13 @@ namespace Sep6Client.Data.DataHelper
                     Title = result.Title,
                     Description = result.Description,
                     Poster = result.Poster,
-                    Rating = result.Rating,
+                    Rating = Math.Round(result.Rating, 2),
                     Votes = result.Votes,
-                    Actors = result.Actors,
                     ReleaseDate = result.ReleaseDate,
-                    Language = result.Language
+                    Language = result.Language,
+                    Actors = new List<Actor>(),
+                    Directors = new List<CrewMember>(),
+                    Crew = new List<CrewMember>()
                 };
             }
             catch (Exception e)
