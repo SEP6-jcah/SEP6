@@ -8,9 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.Toast" Version="4.1.0" />
-    <PackageReference Include="FirebaseAuthentication.net" Version="4.0.2" />
-    <PackageReference Include="FirebaseDatabase.net" Version="4.2.0" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
   </ItemGroup>
 
