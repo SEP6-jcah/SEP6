@@ -131,7 +131,7 @@ else
             toast.ShowError("An error occurred while adding the movie to favorites.");
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
-
+    }
     private void OpenPersonDetails(int id)
     {
         nav.NavigateTo($"PersonDetails/{id}");
