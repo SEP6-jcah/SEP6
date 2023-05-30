@@ -21,7 +21,7 @@
 else
 {
     <h1>@movie.Title </h1>
-    @*<img src="@movie.Poster" alt="Official movie poster."/>*@
+    <img src="@movie.Poster" alt="Official movie poster."/>
     @if (authProvider.User is not null)
     {
     <button @onclick="AddToFavorites">Add to Favorites</button>
@@ -87,9 +87,16 @@ else
         {
             foreach (var comment in comments)
             {
-                <div class="comment">
-                    <p><b>@comment.Username, @comment.Timestamp.ToString()</b></p>
+                <div>
+                    <p>
+                        <b>@comment.Username</b> @comment.Timestamp.ToLocalTime()  
+                        @if (authProvider.User is not null && comment.Username != authProvider.User.Info.DisplayName)
+                        {
+                        <button @onclick="() => FollowUser(comment.Username)">Follow</button>
+                        }
+                    </p>
                     <p>     "@comment.Body"</p>
+                    <p>=======================================================</p>
                 </div>
             }
         }
@@ -102,10 +109,9 @@ else
     @if (authProvider.User is not null)
     {
         <h3><br /><b>Post a Comment</b></h3>
-        <div class="comment-form">
-            <div class="form-group">
-                <label for="commentBody">Comment:</label>
-                <textarea id="commentBody" class="form-control" @bind="newComment.Body"></textarea>
+        <div>
+            <div>
+                <textarea @bind="newComment.Body"></textarea>
             </div>
             <button @onclick="AddComment">Submit</button>
         </div>
@@ -160,12 +166,12 @@ else
             }
             else
             {
-                toast.ShowInfo("Movie is already in favorites.");
+                toast.ShowInfo("Movie is already in favorites!");
             }
         }
         catch (Exception e)
         {
-            toast.ShowError("An error occurred while adding the movie to favorites.");
+            toast.ShowError("An error occurred while adding the movie to favoritesd!");
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
     }
@@ -189,6 +195,35 @@ else
         catch (Exception e)
         {
             toast.ShowError("An error occurred while adding the comment.");
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }   
+    }
+    private async Task FollowUser(string username)
+    {
+        try
+        {
+            var loggedInUserEmail = authProvider.User.Info.Email;
+            var follower = await userService.GetUserByEmailAsync(loggedInUserEmail);
+            var followed = await userService.GetUserByUsernameAsync(username);
+
+            if (follower != null && followed!= null && !follower.Following.Contains(username))
+            {
+                follower.Following.Add(username);
+                await userService.UpdateUserAsync(follower);
+                
+                followed.Followers.Add(authProvider.User.Info.DisplayName);
+                await userService.UpdateUserAsync(followed);
+
+                toast.ShowSuccess("User followed!");
+            }
+            else
+            {
+                toast.ShowInfo("User is already being followed.");
+            }
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("Error, please try again later!");
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
     }

@@ -5,20 +5,21 @@
 @inject IUserService userService
 @inject IMoviesService moviesService
 
-<h3>Account Information: @authProvider.User.Info.DisplayName</h3>
+<PageTitle>Account Information: @authProvider.User.Info.DisplayName</PageTitle>
 
 <div>
-    <label>Email:</label>
+    <label><b>Email: </b></label>
     <span>@authProvider.User.Info.Email</span>
 </div>
 
 <div>
-    <label>Username:</label>
+    <label><b>Username:</b></label>
     <span>@authProvider.User.Info.DisplayName</span>
 </div>
 
+<h3><br/><b>Your Movies!</b></h3>
 <div>
-    <label>Favourite Movies:</label>
+    <label><b>Favourite Movies:</b></label>
     @if (FavouriteMoviesTitles.Any())
     {
         <ul>
@@ -36,8 +37,9 @@
     }
 </div>
 
+<h3><br/><b>Social</b></h3>
 <div>
-    <label>Followers:</label>
+    <label><b>Followers:</b></label>
     @if (Followers.Any())
     {
         <ul>
@@ -54,7 +56,7 @@
 </div>
 
 <div>
-    <label>Following:</label>
+    <label><b>Following:</b></label>
     @if (Following.Any())
     {
         <ul>
@@ -68,10 +70,6 @@
     {
         <p>You are not following anyone yet!</p>
     }
-</div>
-
-<div>
-    <a href="/Messages">Messages</a>
 </div>
 
 @code {
@@ -113,14 +111,14 @@
     {
         foreach (var movieId in FavouriteMovies)
         {
-                if (int.TryParse(movieId, out int id))
+            if (int.TryParse(movieId, out int id))
+            {
+                var movie = await moviesService.GetMovieByIdAsync(id);
+                if (movie != null)
                 {
-                    var movie = await moviesService.GetMovieByIdAsync(id);
-                    if (movie != null)
-                    {
-                        FavouriteMoviesTitles.Add(movie.Title);
-                    }
+                    FavouriteMoviesTitles.Add(movie.Title);
                 }
+            }
         }
     }
 

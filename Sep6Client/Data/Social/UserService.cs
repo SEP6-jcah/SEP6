@@ -39,6 +39,22 @@ namespace Sep6Client.Data.Social{
             return user.Object;
         }
 
+        public async Task<RegisteredUser> GetUserByUsernameAsync(string username)
+        {
+            var users = await firebaseClient
+                .Child(dbResource)
+                .OnceAsync<RegisteredUser>();
+            
+            var user = users.FirstOrDefault(u => u.Object.Username == username);
+          
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            return user.Object;
+        }
+
         public async Task UpdateUserAsync(RegisteredUser user)
         {
             var emailKey = user.Email.Replace(".", "_"); 
@@ -62,7 +78,6 @@ namespace Sep6Client.Data.Social{
             await Console.Out.WriteLineAsync(e.StackTrace);
             }
         }
-
 
         public async Task DeleteUserAsync(string email)
         {
@@ -90,6 +105,22 @@ namespace Sep6Client.Data.Social{
             {
                 throw new Exception("User not found");
             }
+        }
+
+        public async Task<bool> IsUsernameTakenAsync(string username)
+        {
+            var users = await firebaseClient
+                .Child(dbResource)
+                .OnceAsync<RegisteredUser>();
+            
+            var user = users.FirstOrDefault(u => u.Object.Username == username);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
