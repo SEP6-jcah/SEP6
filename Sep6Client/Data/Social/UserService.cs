@@ -1,7 +1,4 @@
-using System;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Sep6Client.Data.DataHelper;
 using Sep6Client.Model;
 using Microsoft.Extensions.Options;
@@ -28,7 +25,9 @@ namespace Sep6Client.Data.Social{
         }
         public async Task<RegisteredUser> GetUserByEmailAsync(string email)
         {
-            var users = await firebaseClient.Child(dbResource).OnceAsync<RegisteredUser>();
+            var users = await firebaseClient
+                .Child(dbResource)
+                .OnceAsync<RegisteredUser>();
             
             var user = users.FirstOrDefault(u => u.Object.Email == email);
 
@@ -43,7 +42,10 @@ namespace Sep6Client.Data.Social{
         public async Task UpdateUserAsync(RegisteredUser user)
         {
             var emailKey = user.Email.Replace(".", "_"); 
-            await firebaseClient.Child(dbResource).Child(emailKey).PutAsync(user);
+            await firebaseClient
+                .Child(dbResource)
+                .Child(emailKey)
+                .PutAsync(user);
         }
 
         public async Task CreateUserAsync(RegisteredUser user)
@@ -51,7 +53,9 @@ namespace Sep6Client.Data.Social{
             try
             {
             var emailKey = user.Email.Replace(".", "_"); 
-            await firebaseClient.Child(dbResource).Child(emailKey).PutAsync(user);
+            await firebaseClient.Child(dbResource)
+                .Child(emailKey)
+                .PutAsync(user);
             }
             catch(Exception e)
             {
@@ -66,7 +70,10 @@ namespace Sep6Client.Data.Social{
 
             if (user != null)
             {
-                await firebaseClient.Child(dbResource).Child(user.Email).DeleteAsync();
+                await firebaseClient
+                    .Child(dbResource)
+                    .Child(user.Email)
+                    .DeleteAsync();
             }
         }
 

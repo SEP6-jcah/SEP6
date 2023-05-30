@@ -3,6 +3,7 @@
 @inject FirebaseAuthClient authProvider
 @inject IToastService toast
 @inject IUserService userService
+@inject IMoviesService moviesService
 
 <h3>Account Information: @authProvider.User.Info.DisplayName</h3>
 
@@ -18,10 +19,10 @@
 
 <div>
     <label>Favourite Movies:</label>
-    @if (FavouriteMovies.Any())
+    @if (FavouriteMoviesTitles.Any())
     {
         <ul>
-            @foreach (var movie in FavouriteMovies)
+            @foreach (var movie in FavouriteMoviesTitles)
             {
                 <li>@movie</li>
             }
@@ -75,6 +76,7 @@
     string Email;
     string Username;
     List<string> FavouriteMovies = new List<string>();
+    List<string> FavouriteMoviesTitles = new List<string>();
     List<string> Followers = new List<string>();
     List<string> Following = new List<string>();
 
@@ -96,11 +98,28 @@
             {
                 toast.ShowError("Failed to load account information");
             }
+            await GetFavouriteMoviesTitles();
         }
         catch (Exception e)
         {
             toast.ShowError("An error occurred, please try again later");
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
+    }
+
+    private async Task GetFavouriteMoviesTitles()
+    {
+        foreach (var movieId in FavouriteMovies)
+        {
+                if (int.TryParse(movieId, out int id))
+                {
+                    var movie = await moviesService.GetMovieByIdAsync(id);
+                    if (movie != null)
+                    {
+                        FavouriteMoviesTitles.Add(movie.Title);
+                    }
+                }
+        }
+        
     }
 }
