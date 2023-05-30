@@ -3,27 +3,31 @@
 @inject FirebaseAuthClient authProvider
 @inject IToastService toast
 @inject IUserService userService
+@inject IMoviesService moviesService
 
-<h3>Account Information: @authProvider.User.Info.DisplayName</h3>
+<PageTitle>Account Information: @authProvider.User.Info.DisplayName</PageTitle>
 
 <div>
-    <label>Email:</label>
+    <label><b>Email: </b></label>
     <span>@authProvider.User.Info.Email</span>
 </div>
 
 <div>
-    <label>Username:</label>
+    <label><b>Username:</b></label>
     <span>@authProvider.User.Info.DisplayName</span>
 </div>
 
+<h3><br/><b>Your Movies!</b></h3>
 <div>
-    <label>Favourite Movies:</label>
-    @if (FavouriteMovies.Any())
+    <label><b>Favourite Movies:</b></label>
+    @if (FavouriteMoviesTitles.Any())
     {
         <ul>
-            @foreach (var movie in FavouriteMovies)
+            @for (int i = 0; i < FavouriteMovies.Count; i++)
             {
-                <li>@movie</li>
+                var movieId = FavouriteMovies[i];
+                var movieTitle = FavouriteMoviesTitles[i];
+                <li><a href="#" @onclick="() => OpenMovieDetails(movieId)">@movieTitle</a></li>
             }
         </ul>
     }
@@ -33,8 +37,9 @@
     }
 </div>
 
+<h3><br/><b>Social</b></h3>
 <div>
-    <label>Followers:</label>
+    <label><b>Followers:</b></label>
     @if (Followers.Any())
     {
         <ul>
@@ -51,7 +56,7 @@
 </div>
 
 <div>
-    <label>Following:</label>
+    <label><b>Following:</b></label>
     @if (Following.Any())
     {
         <ul>
@@ -67,14 +72,11 @@
     }
 </div>
 
-<div>
-    <a href="/Messages">Messages</a>
-</div>
-
 @code {
     string Email;
     string Username;
     List<string> FavouriteMovies = new List<string>();
+    List<string> FavouriteMoviesTitles = new List<string>();
     List<string> Followers = new List<string>();
     List<string> Following = new List<string>();
 
@@ -96,11 +98,35 @@
             {
                 toast.ShowError("Failed to load account information");
             }
+            await GetFavouriteMoviesTitles();
         }
         catch (Exception e)
         {
             toast.ShowError("An error occurred, please try again later");
             await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private async Task GetFavouriteMoviesTitles()
+    {
+        foreach (var movieId in FavouriteMovies)
+        {
+            if (int.TryParse(movieId, out int id))
+            {
+                var movie = await moviesService.GetMovieByIdAsync(id);
+                if (movie != null)
+                {
+                    FavouriteMoviesTitles.Add(movie.Title);
+                }
+            }
+        }
+    }
+
+    private void OpenMovieDetails(string movieId)
+    {
+         if (int.TryParse(movieId, out int id))
+        {
+            nav.NavigateTo($"/MovieDetails/{id}");
         }
     }
 }

@@ -35,6 +35,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICastAndCrewService, CastAndCrewService>();
+builder.Services.AddScoped<ICommentsService, CommentsService>();
 builder.Services.AddSingleton<FirebaseAuthClient>(new FirebaseAuthClient(firebaseConfig));
 builder.Services.AddBlazoredToast();
 
