@@ -24,7 +24,7 @@ else
     <img src="@movie.Poster" alt="Official movie poster."/>
     @if (authProvider.User is not null)
     {
-    <button @onclick="AddToFavorites">Add to Favorites</button>
+        <button @onclick="AddToFavorites">Add to Favorites</button>
     }
     <p><b>ID:</b> @Id</p>
     @if (movie.Directors is {Count: > 0})

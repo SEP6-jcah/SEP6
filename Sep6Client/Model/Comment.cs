@@ -1,3 +1,5 @@
+using System;
+
 namespace Sep6Client.Model{
     public class Comment
     {

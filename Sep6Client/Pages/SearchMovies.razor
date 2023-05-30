@@ -23,6 +23,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th>Poster</th>
                 <th>Title</th>
                 <th>Rating</th>
             </tr>
@@ -32,6 +33,7 @@
             {
                 var id = movie.Id;
                 <tr>
+                    <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
                     <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@movie.Rating/10</td>
                 </tr>

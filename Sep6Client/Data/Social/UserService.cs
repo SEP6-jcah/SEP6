@@ -1,11 +1,15 @@
+using System;
+using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Sep6Client.Data.DataHelper;
 using Sep6Client.Model;
 using Microsoft.Extensions.Options;
 using Firebase.Database;
 using Firebase.Database.Query;
 
-namespace Sep6Client.Data.Social{
+namespace Sep6Client.Data.Social
+{
     public class UserService : IUserService
     {
         private readonly FirebaseClient firebaseClient;

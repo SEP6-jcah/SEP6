@@ -17,11 +17,12 @@
     }
     else
     {
-        <p><b>Popular Movies</b></p>
+        <h1><b>Popular Movies</b></h1>
         <div>
             <table class="table">
                 <thead>
                 <tr>
+                    <th>Poster</th>
                     <th>Title</th>
                     <th>Rating</th>
                     <th>Release Date</th>
@@ -32,6 +33,7 @@
                 {
                     var id = movie.Id;
                     <tr>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
                         <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                         <td>@movie.Rating/10</td>
                         <td>@movie.ReleaseDate</td>
@@ -44,17 +46,24 @@
 </div>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 @if (currentlyPlayingMovies == null)
 {
     <p><em>Loading movies currently in theater...</em></p>
 }
 else
 {
-    <p><b>Currently in Theaters</b></p>
+    <h1><b>Currently in Theaters</b></h1>
     <div>
         <table class="table">
             <thead>
             <tr>
+                <th>Poster</th>
                 <th>Title</th>
                 <th>Rating</th>
                 <th>Release Date</th>
@@ -65,6 +74,7 @@ else
             {
                 var id = movie.Id;
                 <tr>
+                    <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
                     <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@movie.Rating/10</td>
                     <td>@movie.ReleaseDate</td>
@@ -76,6 +86,12 @@ else
 }
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <div>
     @if (highestRatedMovies == null)
     {
@@ -83,11 +99,12 @@ else
     }
     else
     {
-        <p><b>Highest Rated Movies of All Time</b></p>
+        <h1><b>Highest Rated Movies of All Time</b></h1>
         <div>
             <table class="table">
                 <thead>
                 <tr>
+                    <th>Poster</th>
                     <th>Title</th>
                     <th>Rating</th>
                     <th>Release Date</th>
@@ -98,6 +115,7 @@ else
                 {
                     var id = movie.Id;
                     <tr>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
                         <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                         <td>@movie.Rating/10</td>
                         <td>@movie.ReleaseDate</td>
@@ -110,6 +128,12 @@ else
 </div>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <div>
     @if (upcomingReleases == null)
     {
@@ -117,11 +141,12 @@ else
     }
     else
     {
-        <p><b>Upcoming Releases</b></p>
+        <h1><b>Upcoming Releases</b></h1>
         <div>
             <table class="table">
                 <thead>
                 <tr>
+                    <th>Poster</th>
                     <th>Title</th>
                     <th>Release Date</th>
                 </tr>
@@ -131,6 +156,7 @@ else
                 {
                     var id = movie.Id;
                     <tr>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
                         <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                         <td>@movie.ReleaseDate</td>
                     </tr>
