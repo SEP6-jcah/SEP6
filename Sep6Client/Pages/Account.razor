@@ -22,9 +22,11 @@
     @if (FavouriteMoviesTitles.Any())
     {
         <ul>
-            @foreach (var movie in FavouriteMoviesTitles)
+            @for (int i = 0; i < FavouriteMovies.Count; i++)
             {
-                <li>@movie</li>
+                var movieId = FavouriteMovies[i];
+                var movieTitle = FavouriteMoviesTitles[i];
+                <li><a href="#" @onclick="() => OpenMovieDetails(movieId)">@movieTitle</a></li>
             }
         </ul>
     }
@@ -120,6 +122,13 @@
                     }
                 }
         }
-        
+    }
+
+    private void OpenMovieDetails(string movieId)
+    {
+         if (int.TryParse(movieId, out int id))
+        {
+            nav.NavigateTo($"/MovieDetails/{id}");
+        }
     }
 }
