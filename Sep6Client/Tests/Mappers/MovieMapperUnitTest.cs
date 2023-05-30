@@ -2,7 +2,7 @@ using NUnit.Framework;
 using Sep6Client.Data.DataHelper.Mappers;
 using Sep6Client.Data.DataHelper.Wrappers;
 
-namespace Sep6Client.UnitTest.Mappers
+namespace Tests.Mappers
 {
     [TestFixture]
     public class MovieMapperUnitTest

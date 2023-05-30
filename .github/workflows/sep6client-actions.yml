@@ -1,4 +1,4 @@
-name: Build Sep6Client
+name: Build Sep6Client and Run Tests
 
 on:
   push:
@@ -24,3 +24,6 @@ jobs:
 
       - name: Build project
         run: dotnet build ./Sep6Client/Sep6Client.csproj --configuration Release
+   
+      - name: Run NUnit tests
+        run: dotnet test ./Sep6Client/Tests/Tests.csproj --configuration Release --verbosity normal
