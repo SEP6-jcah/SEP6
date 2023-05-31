@@ -8,6 +8,8 @@ namespace Tests.Mappers
     public class MovieMapperUnitTest
     {
         private MovieResult wrapper;
+        private readonly string posterBaseUri = "http://image.tmdb.org/t/p/w500/";
+
 
         [SetUp]
         public void Setup()
@@ -22,7 +24,7 @@ namespace Tests.Mappers
             
             // Act
             var result = MovieMapper.ToMovie(wrapper);
-            
+
             // Assert
             Assert.AreEqual(0, result.Id);
             Assert.AreEqual(0.0, result.Rating);
@@ -33,7 +35,7 @@ namespace Tests.Mappers
             Assert.IsNull(result.Title);
             Assert.IsNull(result.Description);
             Assert.IsNull(result.Language);
-            Assert.IsNull(result.Poster);
+            Assert.AreEqual(posterBaseUri, result.Poster);
             Assert.IsNull(result.ReleaseDate);
         }
         
@@ -66,7 +68,7 @@ namespace Tests.Mappers
             Assert.AreEqual("The End", result.Title);
             Assert.AreEqual("Yes.", result.Description);
             Assert.AreEqual("Enochian",result.Language);
-            Assert.AreEqual("No.", result.Poster);
+            Assert.AreEqual(posterBaseUri+"No.", result.Poster);
             Assert.AreEqual("Maybe.", result.ReleaseDate);
         }
     }
