@@ -1,11 +1,15 @@
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Options;
 using Sep6Client.Data.DataHelper;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Sep6Client.Model;
 using Firebase.Database;
 using Firebase.Database.Query;
 
-namespace Sep6Client.Data.Social{
+namespace Sep6Client.Data.Social
+{
     public class CommentsService : ICommentsService
     {
         private readonly FirebaseClient firebaseClient;

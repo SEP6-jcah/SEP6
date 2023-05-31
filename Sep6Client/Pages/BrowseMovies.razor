@@ -30,6 +30,7 @@ else
         <table class="table">
             <thead>
             <tr>
+                <th>Poster</th>
                 <th>Title</th>
                 <th>Rating</th>
                 <th>Release Date</th>
@@ -40,6 +41,7 @@ else
             {
                 var id = movie.Id;
                 <tr>
+                    <td><img src="@movie.Poster" alt="Movie poster."/></td>
                     <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
                     <td>@movie.Rating/10</td>
                     <td>@movie.ReleaseDate</td>

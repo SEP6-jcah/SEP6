@@ -16,7 +16,7 @@ namespace Sep6Client.Data.DataHelper.Mappers
                     Id = result.Id,
                     Title = result.Title,
                     Description = result.Description,
-                    Poster = result.Poster,
+                    Poster = $"http://image.tmdb.org/t/p/w500/{result.Poster}",
                     Rating = Math.Round(result.Rating, 2),
                     Votes = result.Votes,
                     ReleaseDate = result.ReleaseDate,

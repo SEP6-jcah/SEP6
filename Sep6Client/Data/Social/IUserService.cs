@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sep6Client.Model;
 
-namespace Sep6Client.Data.Social{
+namespace Sep6Client.Data.Social
+{
     public interface IUserService
     {
         Task<RegisteredUser> GetUserByEmailAsync(string email);
