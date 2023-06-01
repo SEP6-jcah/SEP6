@@ -33,12 +33,13 @@
         try
         {
             var isUsernameTaken = await userService.IsUsernameTakenAsync(username);
-            if (!isUsernameTaken)
+            if (isUsernameTaken)
             {
-                var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password, username);
-                SignUpSuccessful();
-            }            
-            toast.ShowError("Username taken!");
+                toast.ShowError("Username is already taken. Please choose a different username.");
+                return;
+            }
+            var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(email, password, username);
+            SignUpSuccessful();
         }
         catch (Exception e)
         {
