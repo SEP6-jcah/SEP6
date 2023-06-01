@@ -1,8 +1,16 @@
 @page "/MovieDetails/{Id:int}"
 @using Sep6Client.Model
 @using Sep6Client.Data.Movies
+@using Sep6Client.Data.Person
+@using Sep6Client.Data.Social
 @inject IMoviesService moviesService
+@inject IPersonService personService
+@inject IUserService userService
+@inject ICommentsService commentsService
 @inject NavigationManager nav
+@inject FirebaseAuthClient authProvider
+@inject IToastService toast
+
 
 <PageTitle>Movie Details</PageTitle>
 
@@ -12,11 +20,102 @@
 }
 else
 {
-    <h1>@movie.Title</h1>
-    @*<img src="@movie.Poster" alt="Official movie poster."/>*@
-    <p>ID: @Id</p>
-    <p>Rating: @movie.Rating/10</p>
-    <p>@movie.Description</p>
+    <h1>@movie.Title </h1>
+    <img src="@movie.Poster" alt="Official movie poster."/>
+    @if (authProvider.User is not null)
+    {
+        <button @onclick="AddToFavorites">Add to Favorites</button>
+    }
+    <p><b>ID:</b> @Id</p>
+    @if (movie.Directors is {Count: > 0})
+    {
+        <p><b>Director(s):</b> @GetPrettifiedDirectorList()</p>
+    }
+    <p><b>Release Date:</b> @movie.ReleaseDate</p>
+    <p><b>Rating:</b> @movie.Rating/10<br/>Based on @movie.Votes votes</p>
+    <p><b>Plot:</b><br/>@movie.Description</p>
+    @if (movie.Actors is {Count: > 0 })
+    {
+        <h3><br/><b>Cast</b></h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Character</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in movie.Actors)
+            {
+                var id = person.PersonId;
+                <tr>
+                    <td><a href=# @onclick="() => OpenPersonDetails(id)">@person.Name</a>&nbsp;&nbsp;&nbsp;</td>
+                    <td>@person.Character</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    
+    @if (movie.Crew is {Count: > 0 })
+    {
+        <h3><br/><b>Crew</b></h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Responsibility</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var person in movie.Crew)
+            {
+                var id = person.PersonId;
+                <tr>
+                    <td><a href=# @onclick="() => OpenPersonDetails(id)">@person.Name</a>&nbsp;&nbsp;&nbsp;</td>
+                    <td>@person.Job</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+
+    <h3><br/><b>Comments</b></h3>
+
+    <div>
+        @if (comments.Any())
+        {
+            foreach (var comment in comments)
+            {
+                <div>
+                    <p>
+                        <b>@comment.Username</b> @comment.Timestamp.ToLocalTime()  
+                        @if (authProvider.User is not null && comment.Username != authProvider.User.Info.DisplayName)
+                        {
+                        <button @onclick="() => FollowUser(comment.Username)">Follow</button>
+                        }
+                    </p>
+                    <p>     "@comment.Body"</p>
+                    <p>=======================================================</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No comments available.</p>
+        }
+    </div>
+
+    @if (authProvider.User is not null)
+    {
+        <h3><br /><b>Post a Comment</b></h3>
+        <div>
+            <div>
+                <textarea @bind="newComment.Body"></textarea>
+            </div>
+            <button @onclick="AddComment">Submit</button>
+        </div>
+    }
 }
 
 <p style="color: red">@errorMessage</p>
@@ -26,16 +125,105 @@ else
     public int Id { get; set; }
     private Movie? movie;
     private string errorMessage = "";
+    private List<Comment> comments = new List<Comment>();
+    private Comment newComment = new Comment();
+
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             movie = await moviesService.GetMovieByIdAsync(Id);
+            comments = await commentsService.GetCommentsByMovieIdAsync(Id);
         }
         catch (Exception e)
         {
             errorMessage = $"Exception thrown: {e.GetType()}\n{e.StackTrace}";
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private string GetPrettifiedDirectorList()
+    {
+        var temp = movie.Directors.Aggregate("", (current, director) => current + $"{director.Name}, ");
+
+        // Removing last two characters if there are any directors
+        return string.IsNullOrWhiteSpace(temp) ? temp : temp[..^2];
+    }
+
+    private async Task AddToFavorites()
+    {
+        try
+        {
+            var loggedInUserEmail = authProvider.User.Info.Email;
+            var user = await userService.GetUserByEmailAsync(loggedInUserEmail);
+
+            if (user != null && !user.FavouriteMovies.Contains(Id.ToString()))
+            {
+                user.FavouriteMovies.Add(Id.ToString());
+                await userService.UpdateUserAsync(user);
+                toast.ShowSuccess("Movie added to favorites!");
+            }
+            else
+            {
+                toast.ShowInfo("Movie is already in favorites!");
+            }
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("An error occurred while adding the movie to favoritesd!");
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+    private void OpenPersonDetails(int id)
+    {
+        nav.NavigateTo($"PersonDetails/{id}");
+    }
+
+    private async Task AddComment()
+    {
+        try
+        {
+            newComment.Timestamp = DateTime.Now;
+            newComment.MovieId = Id;
+            newComment.Username = authProvider.User.Info.DisplayName;
+            comments.Add(newComment);
+            await commentsService.PostCommentAsync(newComment);
+            newComment = new Comment();
+            toast.ShowSuccess("Comment added successfully!");
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("An error occurred while adding the comment.");
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }   
+    }
+    private async Task FollowUser(string username)
+    {
+        try
+        {
+            var loggedInUserEmail = authProvider.User.Info.Email;
+            var follower = await userService.GetUserByEmailAsync(loggedInUserEmail);
+            var followed = await userService.GetUserByUsernameAsync(username);
+
+            if (follower != null && followed!= null && !follower.Following.Contains(username))
+            {
+                follower.Following.Add(username);
+                await userService.UpdateUserAsync(follower);
+                
+                followed.Followers.Add(authProvider.User.Info.DisplayName);
+                await userService.UpdateUserAsync(followed);
+
+                toast.ShowSuccess("User followed!");
+            }
+            else
+            {
+                toast.ShowInfo("User is already being followed.");
+            }
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("Error, please try again later!");
             await Console.Out.WriteLineAsync(e.StackTrace);
         }
     }

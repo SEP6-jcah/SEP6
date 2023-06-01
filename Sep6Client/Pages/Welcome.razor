@@ -1,5 +1,199 @@
 ﻿@page "/"
+@using Sep6Client.Data.Movies
+@using Sep6Client.Data.Person
+@using Sep6Client.Model
+@inject IMoviesService moviesService
+@inject NavigationManager nav
 
 <PageTitle>Welcome</PageTitle>
 
 <h1>Welcome to BestMoviesInc website for movie enthusiasts!</h1>
+<br/>
+<br/>
+<div>
+    @if (popularMovies == null)
+    {
+        <p><em>Loading popular movies...</em></p>
+    }
+    else
+    {
+        <h1><b>Popular Movies</b></h1>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Release Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var movie in popularMovies.Movies)
+                {
+                    var id = movie.Id;
+                    <tr>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
+                        <td>@movie.Rating/10</td>
+                        <td>@movie.ReleaseDate</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+@if (currentlyPlayingMovies == null)
+{
+    <p><em>Loading movies currently in theater...</em></p>
+}
+else
+{
+    <h1><b>Currently in Theaters</b></h1>
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Poster</th>
+                <th>Title</th>
+                <th>Rating</th>
+                <th>Release Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var movie in currentlyPlayingMovies.Movies)
+            {
+                var id = movie.Id;
+                <tr>
+                    <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
+                    <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
+                    <td>@movie.Rating/10</td>
+                    <td>@movie.ReleaseDate</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div>
+    @if (highestRatedMovies == null)
+    {
+        <p><em>Loading top rated movies...</em></p>
+    }
+    else
+    {
+        <h1><b>Highest Rated Movies of All Time</b></h1>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Release Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var movie in highestRatedMovies.Movies)
+                {
+                    var id = movie.Id;
+                    <tr>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
+                        <td>@movie.Rating/10</td>
+                        <td>@movie.ReleaseDate</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div>
+    @if (upcomingReleases == null)
+    {
+        <p><em>Loading upcoming releases...</em></p>
+    }
+    else
+    {
+        <h1><b>Upcoming Releases</b></h1>
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Release Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var movie in upcomingReleases.Movies)
+                {
+                    var id = movie.Id;
+                    <tr>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)"><img src="@movie.Poster" alt="Movie poster."/></a></td>
+                        <td><a href=# @onclick="() => OpenMovieDetails(id)">@movie.Title</a>&nbsp;&nbsp;&nbsp;</td>
+                        <td>@movie.ReleaseDate</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+<p style="color: red">@errorMessage</p>
+
+
+@code {
+    private MovieList? popularMovies;
+    private MovieList? currentlyPlayingMovies;
+    private MovieList? highestRatedMovies;
+    private MovieList? upcomingReleases;
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            popularMovies = await moviesService.GetPopularMoviesAsync();
+            currentlyPlayingMovies = await moviesService.GetCurrentMoviesAsync();
+            highestRatedMovies = await moviesService.GetHighestRatedMoviesAsync();
+            upcomingReleases = await moviesService.GetUpcomingMoviesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Failed to load movies: {e.Message}\n{e.StackTrace}");
+            errorMessage = $"Failed to load movies: {e.Message}";
+        }
+    }
+
+    private void OpenMovieDetails(int id)
+    {
+        nav.NavigateTo($"/MovieDetails/{id}");
+    }
+}

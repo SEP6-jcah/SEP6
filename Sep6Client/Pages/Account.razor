@@ -1,0 +1,132 @@
+@page "/Account"
+@inject NavigationManager nav
+@inject FirebaseAuthClient authProvider
+@inject IToastService toast
+@inject IUserService userService
+@inject IMoviesService moviesService
+
+<PageTitle>Account Information: @authProvider.User.Info.DisplayName</PageTitle>
+
+<div>
+    <label><b>Email: </b></label>
+    <span>@authProvider.User.Info.Email</span>
+</div>
+
+<div>
+    <label><b>Username:</b></label>
+    <span>@authProvider.User.Info.DisplayName</span>
+</div>
+
+<h3><br/><b>Your Movies!</b></h3>
+<div>
+    <label><b>Favourite Movies:</b></label>
+    @if (FavouriteMoviesTitles.Any())
+    {
+        <ul>
+            @for (int i = 0; i < FavouriteMovies.Count; i++)
+            {
+                var movieId = FavouriteMovies[i];
+                var movieTitle = FavouriteMoviesTitles[i];
+                <li><a href="#" @onclick="() => OpenMovieDetails(movieId)">@movieTitle</a></li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>You have no favourites. Find you favourite movies and add them to this list!</p>
+    }
+</div>
+
+<h3><br/><b>Social</b></h3>
+<div>
+    <label><b>Followers:</b></label>
+    @if (Followers.Any())
+    {
+        <ul>
+            @foreach (var follower in Followers)
+            {
+                <li>@follower</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>You have no followers yet!</p>
+    }
+</div>
+
+<div>
+    <label><b>Following:</b></label>
+    @if (Following.Any())
+    {
+        <ul>
+            @foreach (var following in Following)
+            {
+                <li>@following</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>You are not following anyone yet!</p>
+    }
+</div>
+
+@code {
+    string Email;
+    string Username;
+    List<string> FavouriteMovies = new List<string>();
+    List<string> FavouriteMoviesTitles = new List<string>();
+    List<string> Followers = new List<string>();
+    List<string> Following = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var loggedInUserEmail = authProvider.User.Info.Email;
+            var user = await userService.GetUserByEmailAsync(loggedInUserEmail);
+            if (user != null)
+            {
+                Email = user.Email;
+                Username = user.Username;
+                FavouriteMovies = user.FavouriteMovies;
+                Followers = user.Followers;
+                Following = user.Following;
+            }
+            else
+            {
+                toast.ShowError("Failed to load account information");
+            }
+            await GetFavouriteMoviesTitles();
+        }
+        catch (Exception e)
+        {
+            toast.ShowError("An error occurred, please try again later");
+            await Console.Out.WriteLineAsync(e.StackTrace);
+        }
+    }
+
+    private async Task GetFavouriteMoviesTitles()
+    {
+        foreach (var movieId in FavouriteMovies)
+        {
+            if (int.TryParse(movieId, out int id))
+            {
+                var movie = await moviesService.GetMovieByIdAsync(id);
+                if (movie != null)
+                {
+                    FavouriteMoviesTitles.Add(movie.Title);
+                }
+            }
+        }
+    }
+
+    private void OpenMovieDetails(string movieId)
+    {
+         if (int.TryParse(movieId, out int id))
+        {
+            nav.NavigateTo($"/MovieDetails/{id}");
+        }
+    }
+}
